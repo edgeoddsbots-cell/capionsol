@@ -1,0 +1,1671 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CAPI</title>
+    <link rel="icon" type="image/png" href="./capifavicon.png" />
+    <link rel="apple-touch-icon" href="./capifavicon.png" />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        background: #000;
+      }
+
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        background: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow-x: hidden;
+      }
+
+      body {
+        color: #fff;
+      }
+
+      main {
+        width: 100%;
+        overflow: hidden;
+        background: #000;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      /* =========================
+         HERO
+      ========================= */
+
+      .hero {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100vh;
+        min-height: 100svh;
+        overflow: hidden;
+        background-image: url("./capibackground.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-color: #03191d;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.12),
+          rgba(0, 0, 0, 0.02) 55%,
+          rgba(0, 0, 0, 0.08)
+        );
+        pointer-events: none;
+      }
+
+      .header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        width: 100%;
+        height: 96px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 48px;
+      }
+
+      .logo {
+        display: none;
+      }
+
+      .socials {
+        position: absolute;
+        top: 28px;
+        right: 48px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .social-link {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+        transition: background 180ms ease, box-shadow 180ms ease;
+      }
+
+      .social-link:hover {
+        background: rgba(255, 255, 255, 0.18);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+      }
+
+      .x-icon {
+        font-size: 30px;
+        line-height: 1;
+        font-weight: 300;
+      }
+
+      .tg-icon {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
+      /* =========================
+         GALLERY
+      ========================= */
+
+      .gallery-section {
+        position: relative;
+        z-index: 2;
+        height: 210vh;
+        margin-top: -12vh;
+        background: transparent;
+
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='88%25' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='100%25' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M0 4 C8 8 16 2 25 3 C33 4 40 7 49 6 C57 5 64 2 73 3 C82 4 90 7 100 4 V100 H0 Z'/%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='88%25' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='100%25' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M0 4 C8 8 16 2 25 3 C33 4 40 7 49 6 C57 5 64 2 73 3 C82 4 90 7 100 4 V100 H0 Z'/%3E%3C/svg%3E");
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+      }
+
+      .gallery-viewport {
+        position: absolute;
+        inset: -300px -260px -80px -260px;
+        overflow: hidden;
+      }
+
+      .gallery-wall {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: max-content;
+        display: grid;
+        grid-template-columns: repeat(6, 320px);
+        grid-auto-rows: 320px;
+        gap: 0;
+        transform: translate(-50%, -50%) rotate(-6deg) scale(1.08);
+        transform-origin: center;
+      }
+
+      .tile {
+        position: relative;
+        width: 320px;
+        height: 320px;
+        overflow: hidden;
+        background: transparent;
+      }
+
+      .tile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      /* =========================
+         PRESALE + TOKENOMICS
+      ========================= */
+
+      .presale-section {
+        position: relative;
+        z-index: 3;
+        min-height: 100vh;
+        margin-top: -420px;
+        overflow: hidden;
+        background: #07151b;
+
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 1000' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M0 150 C105 184 215 181 334 156 C452 131 558 118 690 144 C814 168 919 185 1043 166 C1168 147 1273 121 1440 145 V1000 H0 Z'/%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 1000' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M0 150 C105 184 215 181 334 156 C452 131 558 118 690 144 C814 168 919 185 1043 166 C1168 147 1273 121 1440 145 V1000 H0 Z'/%3E%3C/svg%3E");
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+      }
+
+      .presale-section::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        z-index: 10;
+        background: linear-gradient(to bottom, transparent, #000);
+        pointer-events: none;
+      }
+
+      .presale-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-image: url("./capipresale.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+      }
+
+      .presale-content {
+        position: relative;
+        z-index: 2;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px;
+        align-items: stretch;
+        padding: 200px 48px 90px;
+      }
+
+      .glass-card {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        padding: 36px 32px;
+        border-radius: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(7, 20, 29, 0.32);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 24px 90px rgba(0, 0, 0, 0.28);
+        overflow: hidden;
+      }
+
+      .presale-card,
+      .tokenomics-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .presale-title,
+      .tokenomics-title {
+        margin: 0;
+        font-size: clamp(38px, 5.2vw, 72px);
+        line-height: 0.92;
+        font-weight: 950;
+        letter-spacing: -0.06em;
+        text-transform: uppercase;
+        color: #ffffff;
+      }
+
+      .presale-title {
+        max-width: 560px;
+      }
+
+      .presale-title span {
+        display: block;
+      }
+
+      /* =========================
+         PRESALE LIVE CARD CONTENT
+      ========================= */
+
+      .presale-address-wrap {
+        margin-top: 20px;
+      }
+
+      .presale-address-label {
+        margin: 0 0 8px;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .presale-address-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .presale-address-text {
+        flex: 1;
+        font-family: 'Courier New', 'Lucida Console', monospace;
+        font-size: 12px;
+        font-weight: 600;
+        color: #67e8f9;
+        letter-spacing: 0.04em;
+        word-break: break-all;
+        line-height: 1.5;
+      }
+
+      .presale-copy-btn {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(34, 211, 238, 0.4);
+        background: rgba(34, 211, 238, 0.12);
+        color: #67e8f9;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        transition: background 180ms ease, border-color 180ms ease, transform 120ms ease;
+        white-space: nowrap;
+      }
+
+      .presale-copy-btn:hover {
+        background: rgba(34, 211, 238, 0.22);
+        border-color: rgba(34, 211, 238, 0.65);
+        transform: scale(1.04);
+      }
+
+      .presale-copy-btn.copied {
+        background: rgba(16, 185, 129, 0.18);
+        border-color: rgba(16, 185, 129, 0.5);
+        color: #6ee7b7;
+      }
+
+      .presale-boxes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .presale-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 18px 12px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        text-align: center;
+        transition: background 200ms ease, border-color 200ms ease;
+      }
+
+      .presale-box:hover {
+        background: rgba(255, 255, 255, 0.13);
+        border-color: rgba(255, 255, 255, 0.22);
+      }
+
+      .presale-box-label {
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .presale-box-value {
+        font-size: clamp(22px, 2.8vw, 34px);
+        font-weight: 950;
+        letter-spacing: -0.05em;
+        color: #ffffff;
+        line-height: 1;
+      }
+
+      /* =========================
+         PRESALE TRACKER - inline v karte
+      ========================= */
+
+      .tracker-inline {
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .tracker-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        gap: 8px;
+      }
+
+      .tracker-title-sm {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .tracker-raised {
+        font-size: 14px;
+        font-weight: 950;
+        letter-spacing: -0.02em;
+        color: #22d3ee;
+      }
+
+      /* Progress bar */
+      .tracker-bar-wrap {
+        position: relative;
+        height: 20px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: visible;
+        margin-bottom: 6px;
+      }
+
+      .tracker-bar-fill {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #3b82f6, #22d3ee);
+        box-shadow: 0 0 18px rgba(34, 211, 238, 0.45);
+        transition: width 800ms cubic-bezier(0.4, 0, 0.2, 1);
+        min-width: 0;
+        position: relative;
+      }
+
+      .tracker-bar-fill::after {
+        content: "";
+        position: absolute;
+        right: -1px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
+      }
+
+      /* Milestone markers */
+      .tracker-milestones {
+        position: relative;
+        height: 28px;
+        margin-top: 2px;
+      }
+
+      .tracker-milestone {
+        position: absolute;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .tracker-milestone-line {
+        width: 2px;
+        height: 7px;
+        background: rgba(255,255,255,0.3);
+        border-radius: 2px;
+      }
+
+      .tracker-milestone-label {
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        color: rgba(255, 255, 255, 0.55);
+        white-space: nowrap;
+      }
+
+      .tracker-milestone.reached .tracker-milestone-line {
+        background: #22d3ee;
+        box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
+      }
+
+      .tracker-milestone.reached .tracker-milestone-label {
+        color: #67e8f9;
+      }
+
+      .tracker-status {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        color: rgba(255,255,255,0.55);
+        letter-spacing: 0.03em;
+      }
+
+      .tracker-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: #22d3ee;
+        box-shadow: 0 0 8px rgba(34, 211, 238, 0.8);
+        animation: trackerPulse 1.8s infinite;
+        flex-shrink: 0;
+      }
+
+      @keyframes trackerPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.75); }
+      }
+
+      .tracker-error {
+        font-size: 11px;
+        color: rgba(255,255,255,0.35);
+        font-style: italic;
+      }
+
+      /* =========================
+         TOKENOMICS
+      ========================= */
+
+      .tokenomics-layout {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 24px;
+        align-items: center;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      .donut-wrap {
+        position: relative;
+        width: min(280px, 100%);
+        aspect-ratio: 1 / 1;
+        margin: 0 auto;
+      }
+
+      .donut {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .donut-segment {
+        fill: none;
+        stroke-width: 15;
+        stroke-linecap: butt;
+        cursor: pointer;
+        opacity: 0.92;
+        transition: opacity 220ms ease, filter 220ms ease;
+      }
+
+      .donut-segment:hover,
+      .donut-segment.active {
+        opacity: 1;
+        filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.22));
+      }
+
+      .donut-center {
+        position: absolute;
+        inset: 28%;
+        border-radius: 999px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: rgba(236, 248, 255, 0.95);
+        color: #1e293b;
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .donut-center strong {
+        font-size: clamp(22px, 3vw, 32px);
+        line-height: 1;
+        font-weight: 950;
+        letter-spacing: -0.06em;
+      }
+
+      .donut-center span {
+        margin-top: 8px;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(30, 41, 59, 0.72);
+      }
+
+      .tokenomics-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .token-row {
+        appearance: none;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        width: 100%;
+        height: 72px;
+        padding: 0 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.08);
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 12px;
+        align-items: center;
+        color: #f8fbff;
+        transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+      }
+
+      .token-row:hover,
+      .token-row.active {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.24);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+      }
+
+      .token-color {
+        width: 22px;
+        height: 22px;
+        border-radius: 8px;
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
+        flex-shrink: 0;
+      }
+
+      .token-name {
+        display: block;
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 1.1;
+        color: #ffffff;
+      }
+
+      .token-amount {
+        display: block;
+        margin-top: 4px;
+        font-size: 12px;
+        font-weight: 700;
+        color: rgba(232, 242, 255, 0.78);
+      }
+
+      .token-percent {
+        font-size: 22px;
+        font-weight: 950;
+        letter-spacing: -0.05em;
+        color: #ffffff;
+      }
+
+      /* =========================
+         ROADMAP
+      ========================= */
+
+      .roadmap-section {
+        position: relative;
+        z-index: 4;
+        background: #07151b;
+        overflow: hidden;
+      }
+
+      .roadmap-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        z-index: 10;
+        background: linear-gradient(to bottom, #000, transparent);
+        pointer-events: none;
+      }
+
+      .roadmap-stage {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        overflow: hidden;
+        background: #07151b;
+      }
+
+      .roadmap-image {
+        width: 100%;
+        height: 100vh;
+        min-height: 100vh;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .roadmap-pin {
+        position: absolute;
+        z-index: 5;
+        transform: translate(-50%, -50%);
+        width: 58px;
+        height: 58px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(34, 211, 238, 0.9);
+        color: #fff;
+        box-shadow:
+          0 0 0 8px rgba(34, 211, 238, 0.14),
+          0 14px 30px rgba(0, 0, 0, 0.34);
+        transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+      }
+
+      .roadmap-pin::before {
+        content: "";
+        position: absolute;
+        inset: -10px;
+        border-radius: 999px;
+        border: 2px solid rgba(125, 230, 255, 0.42);
+        animation: roadmapPulse 2.1s infinite;
+      }
+
+      .roadmap-pin span {
+        position: relative;
+        z-index: 1;
+        font-size: 18px;
+        font-weight: 950;
+      }
+
+      .roadmap-pin:hover,
+      .roadmap-pin.active {
+        background: rgba(16, 185, 129, 0.96);
+        box-shadow:
+          0 0 0 8px rgba(16, 185, 129, 0.18),
+          0 18px 34px rgba(0, 0, 0, 0.38);
+      }
+
+      @keyframes roadmapPulse {
+        0% { transform: scale(0.92); opacity: 0.95; }
+        70% { transform: scale(1.22); opacity: 0; }
+        100% { transform: scale(1.22); opacity: 0; }
+      }
+
+      .roadmap-phase-card {
+        position: absolute;
+        right: 40px;
+        bottom: 40px;
+        z-index: 6;
+        width: min(440px, calc(100% - 32px));
+        padding: 28px 24px 22px;
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(7, 20, 29, 0.52);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 24px 90px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(18px);
+        transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+      }
+
+      .roadmap-phase-card.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .roadmap-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        transition: background 180ms ease;
+      }
+
+      .roadmap-close:hover {
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .roadmap-phase-label {
+        margin: 0 0 10px;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #67e8f9;
+      }
+
+      .roadmap-phase-title {
+        margin: 0;
+        font-size: clamp(30px, 4vw, 54px);
+        line-height: 0.95;
+        font-weight: 950;
+        letter-spacing: -0.06em;
+        text-transform: uppercase;
+        color: #fff;
+      }
+
+      .roadmap-phase-list {
+        margin: 22px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+      }
+
+      .roadmap-phase-list li {
+        position: relative;
+        padding: 14px 14px 14px 42px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(248, 251, 255, 0.92);
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.38;
+      }
+
+      .roadmap-phase-list li::before {
+        content: "";
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        transform: translateY(-50%);
+        border-radius: 999px;
+        background: #22d3ee;
+        box-shadow: 0 0 18px rgba(34, 211, 238, 0.7);
+      }
+
+      /* =========================
+         MERCH PREVIEW
+      ========================= */
+
+      .merch-item {
+        cursor: pointer;
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, rgba(34, 211, 238, 0.18), rgba(16, 185, 129, 0.16)),
+          rgba(255, 255, 255, 0.08) !important;
+        border-color: rgba(34, 211, 238, 0.35) !important;
+        box-shadow: 0 0 24px rgba(34, 211, 238, 0.12);
+        transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+      }
+
+      .merch-item:hover {
+        transform: translateX(6px);
+        background:
+          linear-gradient(135deg, rgba(34, 211, 238, 0.28), rgba(16, 185, 129, 0.22)),
+          rgba(255, 255, 255, 0.12) !important;
+        border-color: rgba(103, 232, 249, 0.6) !important;
+        box-shadow: 0 0 34px rgba(34, 211, 238, 0.22);
+      }
+
+      .merch-item::after {
+        content: "VIEW";
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 10px;
+        font-weight: 950;
+        letter-spacing: 0.16em;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .merch-preview {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        display: grid;
+        place-items: center;
+        padding: 28px;
+        background: rgba(0, 0, 0, 0.72);
+        backdrop-filter: blur(18px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 220ms ease, visibility 220ms ease;
+      }
+
+      .merch-preview.show {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .merch-preview-card {
+        position: relative;
+        width: min(760px, 100%);
+        border-radius: 34px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(7, 20, 29, 0.55);
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55), 0 0 80px rgba(34, 211, 238, 0.18);
+        transform: scale(0.92) translateY(18px);
+        transition: transform 260ms ease;
+      }
+
+      .merch-preview.show .merch-preview-card {
+        transform: scale(1) translateY(0);
+      }
+
+      .merch-preview-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .merch-preview-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 2;
+        width: 42px;
+        height: 42px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.42);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(10px);
+        font-size: 24px;
+        line-height: 1;
+        transition: background 180ms ease, transform 180ms ease;
+      }
+
+      .merch-preview-close:hover {
+        background: rgba(0, 0, 0, 0.64);
+        transform: scale(1.06);
+      }
+
+      /* =========================
+         RESPONSIVE TABLET
+      ========================= */
+
+      @media (max-width: 1100px) {
+        .gallery-section {
+          height: 180vh;
+          margin-top: -10vh;
+        }
+
+        .gallery-viewport {
+          inset: -240px -180px -80px -180px;
+        }
+
+        .gallery-wall {
+          grid-template-columns: repeat(5, 260px);
+          grid-auto-rows: 260px;
+        }
+
+        .tile {
+          width: 260px;
+          height: 260px;
+        }
+
+        .presale-section {
+          margin-top: -360px;
+        }
+
+        .presale-content {
+          grid-template-columns: 1fr;
+          padding: 180px 24px 80px;
+        }
+
+        .glass-card {
+          height: auto;
+          min-height: 520px;
+        }
+
+        .tokenomics-layout {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        .donut-wrap {
+          width: min(320px, 80vw);
+        }
+
+        .roadmap-image {
+          height: 100vh;
+        }
+      }
+
+      /* =========================
+         RESPONSIVE MOBILE
+      ========================= */
+
+      @media (max-width: 640px) {
+        .hero {
+          height: 100svh;
+          min-height: 100svh;
+          background-image: url("./capibackgroundmobile.png");
+          background-size: cover;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-color: #082f34;
+        }
+
+        .hero-overlay {
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.02),
+            rgba(0, 0, 0, 0.02) 65%,
+            rgba(0, 0, 0, 0.1)
+          );
+        }
+
+        .header {
+          height: 82px;
+          padding: 20px;
+        }
+
+        .socials {
+          top: 22px;
+          right: 20px;
+          gap: 12px;
+        }
+
+        .social-link {
+          width: 38px;
+          height: 38px;
+        }
+
+        .x-icon {
+          font-size: 25px;
+        }
+
+        .tg-icon {
+          width: 21px;
+          height: 21px;
+        }
+
+        .gallery-section {
+          height: 160vh;
+          margin-top: -70px;
+          -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='78%25' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='100%25' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M0 4 C8 8 16 2 25 3 C33 4 40 7 49 6 C57 5 64 2 73 3 C82 4 90 7 100 4 V100 H0 Z'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='78%25' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='100%25' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M0 4 C8 8 16 2 25 3 C33 4 40 7 49 6 C57 5 64 2 73 3 C82 4 90 7 100 4 V100 H0 Z'/%3E%3C/svg%3E");
+        }
+
+        .gallery-viewport {
+          inset: -120px -145px -50px -145px;
+        }
+
+        .gallery-wall {
+          grid-template-columns: repeat(4, 170px);
+          grid-auto-rows: 170px;
+          transform: translate(-50%, -50%) rotate(-6deg) scale(1.02);
+        }
+
+        .tile {
+          width: 170px;
+          height: 170px;
+        }
+
+        .presale-section {
+          min-height: auto;
+          margin-top: -200px;
+          -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 1000' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M0 80 C180 108 360 92 540 84 C720 76 900 96 1080 88 C1260 80 1350 90 1440 82 V1000 H0 Z'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 1000' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M0 80 C180 108 360 92 540 84 C720 76 900 96 1080 88 C1260 80 1350 90 1440 82 V1000 H0 Z'/%3E%3C/svg%3E");
+        }
+
+        .presale-section::after,
+        .roadmap-section::before {
+          height: 50px;
+        }
+
+        .presale-bg {
+          background-size: cover;
+          background-position: center center;
+        }
+
+        .presale-content {
+          min-height: auto;
+          grid-template-columns: 1fr;
+          padding: 200px 18px 70px;
+          gap: 18px;
+          align-items: center;
+        }
+
+        .glass-card {
+          min-height: auto;
+          height: auto;
+          padding: 26px 18px 24px;
+          border-radius: 24px;
+        }
+
+        .presale-title {
+          max-width: 100%;
+          font-size: clamp(25px, 7.6vw, 34px);
+          line-height: 0.98;
+          letter-spacing: -0.045em;
+        }
+
+        .presale-title span {
+          display: block;
+        }
+
+        .tokenomics-title {
+          font-size: clamp(32px, 9vw, 42px);
+          line-height: 0.96;
+          letter-spacing: -0.045em;
+        }
+
+        .presale-address-text {
+          font-size: 11px;
+        }
+
+        .presale-copy-btn {
+          padding: 7px 10px;
+          font-size: 11px;
+        }
+
+        .presale-boxes {
+          gap: 10px;
+          margin-top: 14px;
+        }
+
+        .presale-box {
+          padding: 16px 10px;
+          border-radius: 16px;
+        }
+
+        .presale-box-value {
+          font-size: clamp(20px, 6vw, 28px);
+        }
+
+        .tracker-inline {
+          margin-top: 14px;
+          padding-top: 14px;
+        }
+
+        .tokenomics-layout {
+          grid-template-columns: 1fr;
+          gap: 22px;
+          margin-top: 24px;
+        }
+
+        .donut-wrap {
+          width: min(235px, 68vw);
+        }
+
+        .tokenomics-list {
+          gap: 10px;
+        }
+
+        .token-row {
+          height: 64px;
+          gap: 10px;
+          padding: 0 12px;
+          border-radius: 16px;
+        }
+
+        .token-color {
+          width: 18px;
+          height: 18px;
+          border-radius: 7px;
+        }
+
+        .token-name {
+          font-size: 14px;
+        }
+
+        .token-amount {
+          font-size: 11px;
+        }
+
+        .token-percent {
+          font-size: 19px;
+        }
+
+        .roadmap-stage {
+          min-height: 100svh;
+        }
+
+        .roadmap-image {
+          height: 100svh;
+          min-height: 100svh;
+          object-fit: cover;
+          object-position: center center;
+        }
+
+        .roadmap-pin {
+          width: 44px;
+          height: 44px;
+        }
+
+        .roadmap-pin span {
+          font-size: 14px;
+        }
+
+        .roadmap-phase-card {
+          right: 16px;
+          left: 16px;
+          bottom: 16px;
+          width: auto;
+          padding: 22px 16px 18px;
+          border-radius: 22px;
+        }
+
+        .roadmap-phase-title {
+          font-size: clamp(26px, 9vw, 40px);
+        }
+
+        .roadmap-phase-list li {
+          padding: 13px 12px 13px 38px;
+          font-size: 13px;
+        }
+
+        .merch-preview {
+          padding: 18px;
+        }
+
+        .merch-preview-card {
+          border-radius: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+
+        <header class="header">
+          <h1 class="logo">CAPI</h1>
+
+          <nav class="socials" aria-label="Social links">
+            <a class="social-link" href="https://x.com/capionsolana_" target="_blank" rel="noreferrer" aria-label="X">
+              <span class="x-icon">𝕏</span>
+            </a>
+
+            <a class="social-link" href="https://t.me/capi_sol" target="_blank" rel="noreferrer" aria-label="Telegram">
+              <svg class="tg-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21.72 3.18a1.1 1.1 0 0 0-1.13-.17L2.82 10.02c-.5.2-.82.65-.82 1.17 0 .55.36 1.01.91 1.17l4.43 1.32 1.7 5.5c.14.45.5.78.96.86.46.09.91-.1 1.18-.49l2.43-3.46 4.8 3.55c.35.26.81.31 1.21.14.4-.18.67-.54.73-.98l1.8-14.55c.05-.42-.12-.83-.43-1.07ZM18.8 6.16 9.9 13.98l-.34 3.03-1.08-3.5 10.32-7.35Z" />
+              </svg>
+            </a>
+          </nav>
+        </header>
+      </section>
+
+      <section class="gallery-section" id="gallery" aria-label="CAPI photo wall">
+        <div class="gallery-viewport">
+          <div class="gallery-wall" id="gallery-wall"></div>
+        </div>
+      </section>
+
+      <section class="presale-section" id="presale">
+        <div class="presale-bg"></div>
+
+        <div class="presale-content">
+
+          <!-- PRESALE LIVE CARD -->
+          <div class="glass-card presale-card">
+            <h2 class="presale-title">
+              <span>CAPI</span>
+              <span>Pre-Sale</span>
+              <span>Is Live!</span>
+            </h2>
+
+            <div class="presale-address-wrap">
+              <p class="presale-address-label">Pre-Sale Address</p>
+              <div class="presale-address-box">
+                <span class="presale-address-text" id="presale-address">4JQizF44AHC59APYWb17mG6FQzQCLZQrGCJbswG1Wezi</span>
+                <button class="presale-copy-btn" id="copy-btn" aria-label="Copy address">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                  <span id="copy-label">Copy</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="presale-boxes">
+              <div class="presale-box">
+                <span class="presale-box-label">Min Buy</span>
+                <span class="presale-box-value">0.2 SOL</span>
+              </div>
+              <div class="presale-box">
+                <span class="presale-box-label">Max Buy</span>
+                <span class="presale-box-value">2 SOL</span>
+              </div>
+              <div class="presale-box">
+                <span class="presale-box-label">Soft Cap</span>
+                <span class="presale-box-value">50 SOL</span>
+              </div>
+              <div class="presale-box">
+                <span class="presale-box-label">Hard Cap</span>
+                <span class="presale-box-value">80 SOL</span>
+              </div>
+            </div>
+
+            <!-- PRESALE TRACKER - inline v karte -->
+            <div class="tracker-inline">
+              <div class="tracker-header">
+                <span class="tracker-title-sm">Pre-Sale Tracker</span>
+                <span class="tracker-raised"><span id="tracker-sol">—</span> / 80 SOL</span>
+              </div>
+              <div class="tracker-bar-wrap">
+                <div class="tracker-bar-fill" id="tracker-bar" style="width: 0%"></div>
+              </div>
+              <div class="tracker-milestones">
+                <div class="tracker-milestone" id="milestone-soft" style="left: 62.5%">
+                  <div class="tracker-milestone-line"></div>
+                  <div class="tracker-milestone-label">50 SOL</div>
+                </div>
+                <div class="tracker-milestone" style="left: 99%">
+                  <div class="tracker-milestone-line"></div>
+                  <div class="tracker-milestone-label">80 SOL</div>
+                </div>
+              </div>
+              <div class="tracker-status">
+                <div class="tracker-dot"></div>
+                <span id="tracker-status-text">Loading…</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TOKENOMICS CARD -->
+          <div class="glass-card tokenomics-card">
+            <h2 class="tokenomics-title">Tokenomics</h2>
+
+            <div class="tokenomics-layout">
+              <div class="donut-wrap">
+                <svg class="donut" viewBox="0 0 120 120" aria-label="Tokenomics pie chart">
+                  <circle class="donut-segment active" data-token="liquidity" cx="60" cy="60" r="45" pathLength="100" stroke="#3b82f6" stroke-dasharray="50 50" stroke-dashoffset="0" transform="rotate(-90 60 60)" />
+                  <circle class="donut-segment" data-token="presale" cx="60" cy="60" r="45" pathLength="100" stroke="#22d3ee" stroke-dasharray="30 70" stroke-dashoffset="-50" transform="rotate(-90 60 60)" />
+                  <circle class="donut-segment" data-token="team" cx="60" cy="60" r="45" pathLength="100" stroke="#06b6d4" stroke-dasharray="10 90" stroke-dashoffset="-80" transform="rotate(-90 60 60)" />
+                  <circle class="donut-segment" data-token="marketing" cx="60" cy="60" r="45" pathLength="100" stroke="#0891b2" stroke-dasharray="10 90" stroke-dashoffset="-90" transform="rotate(-90 60 60)" />
+                </svg>
+
+                <div class="donut-center">
+                  <strong>10B</strong>
+                  <span>Total Supply</span>
+                </div>
+              </div>
+
+              <div class="tokenomics-list">
+                <button class="token-row active" type="button" data-token="liquidity">
+                  <span class="token-color" style="background:#3b82f6"></span>
+                  <span>
+                    <span class="token-name">Liquidity Pool</span>
+                    <span class="token-amount">5B tokens</span>
+                  </span>
+                  <span class="token-percent">50%</span>
+                </button>
+
+                <button class="token-row" type="button" data-token="presale">
+                  <span class="token-color" style="background:#22d3ee"></span>
+                  <span>
+                    <span class="token-name">Pre-sale</span>
+                    <span class="token-amount">3B tokens</span>
+                  </span>
+                  <span class="token-percent">30%</span>
+                </button>
+
+                <button class="token-row" type="button" data-token="team">
+                  <span class="token-color" style="background:#06b6d4"></span>
+                  <span>
+                    <span class="token-name">DEVs & Team</span>
+                    <span class="token-amount">1B tokens</span>
+                  </span>
+                  <span class="token-percent">10%</span>
+                </button>
+
+                <button class="token-row" type="button" data-token="marketing">
+                  <span class="token-color" style="background:#0891b2"></span>
+                  <span>
+                    <span class="token-name">Marketing Wallets</span>
+                    <span class="token-amount">1B tokens</span>
+                  </span>
+                  <span class="token-percent">10%</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="roadmap-section" id="roadmap">
+        <div class="roadmap-stage">
+          <img class="roadmap-image" src="./roadmap.png" alt="CAPI roadmap" />
+
+          <button class="roadmap-pin" data-phase="phase1" style="left: 6.2%; top: 22.8%;">
+            <span>1</span>
+          </button>
+          <button class="roadmap-pin" data-phase="phase2" style="left: 53%; top: 37.8%;">
+            <span>2</span>
+          </button>
+          <button class="roadmap-pin" data-phase="phase3" style="left: 68.5%; top: 94.2%;">
+            <span>3</span>
+          </button>
+          <button class="roadmap-pin" data-phase="phase4" style="left: 94.5%; top: 15.5%;">
+            <span>4</span>
+          </button>
+
+          <div class="roadmap-phase-card" id="roadmap-phase-card">
+            <button class="roadmap-close" id="roadmap-close" aria-label="Close roadmap phase">×</button>
+            <p class="roadmap-phase-label" id="roadmap-phase-label"></p>
+            <h3 class="roadmap-phase-title" id="roadmap-phase-title"></h3>
+            <ul class="roadmap-phase-list" id="roadmap-phase-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="merch-preview" id="merch-preview" aria-hidden="true">
+        <div class="merch-preview-card">
+          <button class="merch-preview-close" id="merch-preview-close" aria-label="Close merchandise preview">×</button>
+          <img src="./capi-merch.png" alt="CAPI Merchandise" />
+        </div>
+      </div>
+    </main>
+
+    <script>
+      /* =========================
+         GALLERY
+      ========================= */
+
+      const galleryImages = [
+        "./images/capi-01.png", "./images/capi-02.png", "./images/capi-03.png",
+        "./images/capi-04.png", "./images/capi-05.png", "./images/capi-06.png",
+        "./images/capi-07.png", "./images/capi-08.png", "./images/capi-09.png",
+        "./images/capi-10.png", "./images/capi-11.png", "./images/capi-12.png",
+        "./images/capi-13.png", "./images/capi-14.png", "./images/capi-15.png",
+        "./images/capi-16.png", "./images/capi-17.png", "./images/capi-18.png",
+        "./images/capi-19.png", "./images/capi-20.png", "./images/capi-21.png",
+        "./images/capi-22.png", "./images/capi-23.png", "./images/capi-24.png"
+      ];
+
+      const COLS = 6;
+      const isMobile = window.innerWidth <= 640;
+      const ROWS = isMobile ? 8 : 6;
+      const TOTAL = COLS * ROWS;
+      const displayImages = [];
+      for (let i = 0; i < TOTAL; i++) displayImages.push(galleryImages[i % galleryImages.length]);
+
+      const galleryWall = document.getElementById("gallery-wall");
+      displayImages.forEach((src, index) => {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = `CAPI artwork ${(index % galleryImages.length) + 1}`;
+        img.loading = index < 18 ? "eager" : "lazy";
+        img.decoding = "async";
+        img.onerror = () => { tile.style.background = "transparent"; img.style.display = "none"; };
+        tile.appendChild(img);
+        galleryWall.appendChild(tile);
+      });
+
+      /* =========================
+         PRESALE TRACKER
+         Používá veřejný Solana mainnet RPC - funguje přímo v prohlížeči
+      ========================= */
+
+      (function() {
+        const PRESALE_ADDRESS = "4JQizF44AHC59APYWb17mG6FQzQCLZQrGCJbswG1Wezi";
+        const SOFT_CAP = 50;
+        const HARD_CAP = 80;
+
+        const barEl = document.getElementById("tracker-bar");
+        const solEl = document.getElementById("tracker-sol");
+        const statusEl = document.getElementById("tracker-status-text");
+        const milestoneSoft = document.getElementById("milestone-soft");
+
+        async function fetchBalance() {
+          /* Zkusíme více veřejných RPC endpointů */
+          const endpoints = [
+            "https://api.mainnet-beta.solana.com",
+            "https://solana.publicnode.com",
+            "https://rpc.ankr.com/solana"
+          ];
+
+          for (const endpoint of endpoints) {
+            try {
+              const res = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  jsonrpc: "2.0",
+                  id: 1,
+                  method: "getBalance",
+                  params: [PRESALE_ADDRESS, { commitment: "confirmed" }]
+                })
+              });
+
+              if (!res.ok) continue;
+              const data = await res.json();
+              const lamports = data?.result?.value ?? null;
+              if (lamports === null) continue;
+
+              const sol = lamports / 1_000_000_000;
+              const pct = Math.min((sol / HARD_CAP) * 100, 100);
+              const softReached = sol >= SOFT_CAP;
+
+              solEl.textContent = sol.toFixed(2);
+              barEl.style.width = pct.toFixed(2) + "%";
+
+              if (softReached) milestoneSoft.classList.add("reached");
+
+              if (sol >= HARD_CAP) {
+                statusEl.textContent = "🎉 Hard Cap reached! Pre-sale complete.";
+                barEl.style.background = "linear-gradient(90deg, #10b981, #34d399)";
+              } else if (softReached) {
+                statusEl.textContent = `Soft Cap reached · ${(HARD_CAP - sol).toFixed(2)} SOL to Hard Cap`;
+              } else {
+                statusEl.textContent = "";
+              }
+              return; /* Úspěch - skončíme */
+
+            } catch (_) { /* zkusíme další endpoint */ }
+          }
+
+          /* Všechny endpointy selhaly */
+          solEl.textContent = "—";
+          statusEl.textContent = "Live data unavailable · refresh to retry";
+          statusEl.classList.add("tracker-error");
+        }
+
+        fetchBalance();
+        setInterval(fetchBalance, 30_000);
+      })();
+
+      /* =========================
+         COPY ADDRESS
+      ========================= */
+
+      const copyBtn = document.getElementById("copy-btn");
+      const copyLabel = document.getElementById("copy-label");
+      const address = "4JQizF44AHC59APYWb17mG6FQzQCLZQrGCJbswG1Wezi";
+
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(address).then(() => {
+          copyBtn.classList.add("copied");
+          copyLabel.textContent = "Copied!";
+          setTimeout(() => {
+            copyBtn.classList.remove("copied");
+            copyLabel.textContent = "Copy";
+          }, 2000);
+        });
+      });
+
+      /* =========================
+         TOKENOMICS
+      ========================= */
+
+      const tokenRows = document.querySelectorAll(".token-row");
+      const donutSegments = document.querySelectorAll(".donut-segment");
+
+      function setActiveToken(token) {
+        tokenRows.forEach(row => row.classList.toggle("active", row.dataset.token === token));
+        donutSegments.forEach(seg => seg.classList.toggle("active", seg.dataset.token === token));
+      }
+
+      tokenRows.forEach(row => {
+        row.addEventListener("mouseenter", () => setActiveToken(row.dataset.token));
+        row.addEventListener("click", () => setActiveToken(row.dataset.token));
+      });
+      donutSegments.forEach(seg => {
+        seg.addEventListener("mouseenter", () => setActiveToken(seg.dataset.token));
+        seg.addEventListener("click", () => setActiveToken(seg.dataset.token));
+      });
+      setActiveToken("liquidity");
+
+      /* =========================
+         ROADMAP
+      ========================= */
+
+      const roadmapData = {
+        phase1: {
+          label: "Phase 1", title: "Foundation",
+          items: ["Website launch", "X / Telegram setup", "Brand identity", "Initial community build"]
+        },
+        phase2: {
+          label: "Phase 2", title: "Pre-Sale",
+          items: ["Pre-sale launch", "Early supporter rewards", "Community growth", "Marketing push"]
+        },
+        phase3: {
+          label: "Phase 3", title: "Launch",
+          items: ["Launch $CAPI", "Major CEX listings", "Marketing & ADs for $CAPI", "Community governance launch"]
+        },
+        phase4: {
+          label: "Phase 4", title: "Expansion",
+          items: ["NFT collection", { text: "Merchandise", type: "merch" }, "Features for holders including free rewards", "Ecosystem development & long-term expansion"]
+        }
+      };
+
+      const roadmapPins = document.querySelectorAll(".roadmap-pin");
+      const roadmapCard = document.getElementById("roadmap-phase-card");
+      const roadmapClose = document.getElementById("roadmap-close");
+      const roadmapPhaseLabel = document.getElementById("roadmap-phase-label");
+      const roadmapPhaseTitle = document.getElementById("roadmap-phase-title");
+      const roadmapPhaseList = document.getElementById("roadmap-phase-list");
+      const merchPreview = document.getElementById("merch-preview");
+      const merchPreviewClose = document.getElementById("merch-preview-close");
+
+      function openMerchPreview() { merchPreview.classList.add("show"); merchPreview.setAttribute("aria-hidden", "false"); }
+      function closeMerchPreview() { merchPreview.classList.remove("show"); merchPreview.setAttribute("aria-hidden", "true"); }
+
+      merchPreviewClose.addEventListener("click", closeMerchPreview);
+      merchPreview.addEventListener("click", e => { if (e.target === merchPreview) closeMerchPreview(); });
+      document.addEventListener("keydown", e => { if (e.key === "Escape") closeMerchPreview(); });
+
+      function openRoadmapPhase(phaseKey) {
+        const phase = roadmapData[phaseKey];
+        if (!phase) return;
+        roadmapPins.forEach(pin => pin.classList.toggle("active", pin.dataset.phase === phaseKey));
+        roadmapPhaseLabel.textContent = phase.label;
+        roadmapPhaseTitle.textContent = phase.title;
+        roadmapPhaseList.innerHTML = "";
+        phase.items.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = typeof item === "string" ? item : item.text;
+          if (typeof item === "object" && item.type === "merch") {
+            li.classList.add("merch-item");
+            li.setAttribute("role", "button");
+            li.setAttribute("tabindex", "0");
+            li.addEventListener("mouseenter", openMerchPreview);
+            li.addEventListener("click", openMerchPreview);
+            li.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openMerchPreview(); } });
+          }
+          roadmapPhaseList.appendChild(li);
+        });
+        roadmapCard.classList.add("show");
+      }
+
+      function closeRoadmapPhase() {
+        roadmapCard.classList.remove("show");
+        roadmapPins.forEach(pin => pin.classList.remove("active"));
+      }
+
+      roadmapPins.forEach(pin => pin.addEventListener("click", () => openRoadmapPhase(pin.dataset.phase)));
+      roadmapClose.addEventListener("click", closeRoadmapPhase);
+    </script>
+  </body>
+</html>
