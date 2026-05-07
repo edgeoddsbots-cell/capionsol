@@ -329,6 +329,7 @@
           if(!phantom||!phantom.isPhantom){alert('Please install Phantom wallet from phantom.app');btn.textContent='Connect Wallet';btn.style.opacity='1';return;}
           phantom.connect().then(function(resp){
             walletPubkey=resp.publicKey.toString();
+            console.log('Computed ATA:', getATA(new solanaWeb3.PublicKey(resp.publicKey.toString()), new solanaWeb3.PublicKey(MINT_STR)).toString());
             walletAdapter=phantom;
             var allocation=merkleTree&&merkleTree.claims&&merkleTree.claims[walletPubkey];
             $('claim-wallet-addr').textContent=walletPubkey.slice(0,8)+'...'+walletPubkey.slice(-8);
