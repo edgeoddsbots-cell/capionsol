@@ -362,21 +362,8 @@
             var tx=new solanaWeb3.Transaction();
             tx.recentBlockhash=bh.blockhash;tx.feePayer=wallet;
 
-            return conn.getAccountInfo(claimantAta).then(function(ataInfo){
-              if(!ataInfo){
-                tx.add(new solanaWeb3.TransactionInstruction({
-                  keys:[
-                    {pubkey:wallet,isSigner:true,isWritable:true},
-                    {pubkey:claimantAta,isSigner:false,isWritable:true},
-                    {pubkey:wallet,isSigner:false,isWritable:false},
-                    {pubkey:mint,isSigner:false,isWritable:false},
-                    {pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},
-                    {pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false}
-                  ],
-                  programId:ASSOC_TOKEN,
-                  data:Buf.alloc(0)
-                }));
-              }
+return conn.getAccountInfo(claimantAta).then(function(ataInfo){
+  if(false){/* ATA creation disabled */}
 
               var amount=BigInt(allocation.amount);
               var proof=allocation.proof.map(function(p){return Buf.from(p,'hex');});
