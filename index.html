@@ -285,7 +285,40 @@
       })();
 
       function initClaim(){
-        var Buf=solanaWeb3.Buffer;
+        var Buf=solanaWeb3.Buffer||{
+  from:function(data,enc){
+    if(data instanceof Uint8Array)return data;
+    if(Array.isArray(data))return new Uint8Array(data);
+    if(typeof data==='string'&&enc==='hex'){
+      var b=new Uint8Array(data.length/2);
+      for(var i=0;i<data.length;i+=2)b[i/2]=parseInt(data.substr(i,2),16);
+      return b;
+    }
+    if(typeof data==='string'){
+      return new TextEncoder().encode(data);
+    }
+    return new Uint8Array(data);
+  },
+  alloc:function(n){
+    var a=new Uint8Array(n);
+    a.writeBigUInt64LE=function(val){
+      var v=BigInt(val);
+      for(var i=0;i<8;i++){this[i]=Number(v&BigInt(255));v=v>>BigInt(8);}
+    };
+    a.writeUInt32LE=function(val){
+      this[0]=val&255;this[1]=(val>>8)&255;this[2]=(val>>16)&255;this[3]=(val>>24)&255;
+    };
+    return a;
+  },
+  concat:function(list){
+    var len=0;
+    for(var i=0;i<list.length;i++)len+=list[i].length;
+    var out=new Uint8Array(len);
+    var off=0;
+    for(var i=0;i<list.length;i++){out.set(list[i],off);off+=list[i].length;}
+    return out;
+  }
+};
         var PROGRAM_ID='FyfMZ7iQT8wF5AD5oTZ8k7R2HZpjUFZSgN2m5LiYBEYq';
         var MINT_STR='VFEAugy5TqFDeGUcRQ1KA7jqNoG1sjF8LaZApVBaXbg';
         var VAULT='b5E3BHWvchdgdSgeRroUjyBKyseS53mLm4UUk6mE9oQ';
