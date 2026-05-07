@@ -285,7 +285,8 @@
       })();
 
       function initClaim(){
-        var Buf=solanaWeb3.Buffer;
+        var Buf=window.Buffer||{from:function(a,enc){if(typeof a==='string'){var e=enc||'utf8';if(e==='hex'){var r=[];for(var i=0;i<a.length;i+=2)r.push(parseInt(a.substr(i,2),16));return new Uint8Array(r);}var te=new TextEncoder();return te.encode(a);}return new Uint8Array(a);},alloc:function(n){return new Uint8Array(n);},concat:function(list){var len=list.reduce(function(s,a){return s+a.length;},0);var r=new Uint8Array(len);var o=0;list.forEach(function(a){r.set(a,o);o+=a.length;});return r;}};
+var _origAlloc=Buf.alloc;Buf.alloc=function(n){var a=new Uint8Array(n);a.writeBigUInt64LE=function(val){var v=BigInt(val);for(var i=0;i<8;i++){a[i]=Number(v&BigInt(0xff));v>>=BigInt(8);}return a;};a.writeUInt32LE=function(val){a[0]=val&0xff;a[1]=(val>>8)&0xff;a[2]=(val>>16)&0xff;a[3]=(val>>24)&0xff;return a;};return a;};
         var PROGRAM_ID='FyfMZ7iQT8wF5AD5oTZ8k7R2HZpjUFZSgN2m5LiYBEYq';
         var MINT_STR='VFEAugy5TqFDeGUcRQ1KA7jqNoG1sjF8LaZApVBaXbg';
         var RPC='https://api.mainnet-beta.solana.com';
