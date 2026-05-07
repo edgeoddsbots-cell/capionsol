@@ -16,7 +16,6 @@
       a { color: inherit; }
       img { display: block; max-width: 100%; }
       button { font: inherit; }
-
       .hero { position: relative; z-index: 1; width: 100%; height: 100vh; min-height: 100svh; overflow: hidden; background-image: url("./capibackground.png"); background-size: cover; background-repeat: no-repeat; background-position: center center; background-color: #03191d; }
       .hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.02) 55%, rgba(0,0,0,0.08)); pointer-events: none; }
       .header { position: absolute; top: 0; left: 0; z-index: 5; width: 100%; height: 96px; display: flex; align-items: center; justify-content: center; padding: 24px 48px; }
@@ -26,13 +25,11 @@
       .social-link:hover { background: rgba(255,255,255,0.18); box-shadow: 0 16px 34px rgba(0,0,0,0.22); }
       .x-icon { font-size: 30px; line-height: 1; font-weight: 300; }
       .tg-icon { width: 24px; height: 24px; display: block; }
-
       .gallery-section { position: relative; z-index: 2; height: 210vh; margin-top: -12vh; background: transparent; -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='88%25' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='100%25' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M0 4 C8 8 16 2 25 3 C33 4 40 7 49 6 C57 5 64 2 73 3 C82 4 90 7 100 4 V100 H0 Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='88%25' stop-color='white' stop-opacity='1'/%3E%3Cstop offset='100%25' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M0 4 C8 8 16 2 25 3 C33 4 40 7 49 6 C57 5 64 2 73 3 C82 4 90 7 100 4 V100 H0 Z'/%3E%3C/svg%3E"); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
       .gallery-viewport { position: absolute; inset: -300px -260px -80px -260px; overflow: hidden; }
       .gallery-wall { position: absolute; left: 50%; top: 50%; width: max-content; display: grid; grid-template-columns: repeat(6, 320px); grid-auto-rows: 320px; gap: 0; transform: translate(-50%, -50%) rotate(-6deg) scale(1.08); transform-origin: center; }
       .tile { position: relative; width: 320px; height: 320px; overflow: hidden; background: transparent; }
       .tile img { width: 100%; height: 100%; object-fit: cover; object-position: center; user-select: none; pointer-events: none; }
-
       .presale-section { position: relative; z-index: 3; min-height: 100vh; margin-top: -420px; overflow: hidden; background: #07151b; -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 1000' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M0 150 C105 184 215 181 334 156 C452 131 558 118 690 144 C814 168 919 185 1043 166 C1168 147 1273 121 1440 145 V1000 H0 Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 1000' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M0 150 C105 184 215 181 334 156 C452 131 558 118 690 144 C814 168 919 185 1043 166 C1168 147 1273 121 1440 145 V1000 H0 Z'/%3E%3C/svg%3E"); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
       .presale-section::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 70px; z-index: 10; background: linear-gradient(to bottom, transparent, #000); pointer-events: none; }
       .presale-bg { position: absolute; inset: 0; z-index: 1; background-image: url("./capipresale.png"); background-repeat: no-repeat; background-position: center center; background-size: cover; }
@@ -42,7 +39,6 @@
       .presale-title, .tokenomics-title { margin: 0; font-size: clamp(38px, 5.2vw, 72px); line-height: 0.92; font-weight: 950; letter-spacing: -0.06em; text-transform: uppercase; color: #ffffff; }
       .presale-title { max-width: 560px; }
       .presale-title span { display: block; }
-
       .tokenomics-layout { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 24px; align-items: center; margin-top: auto; margin-bottom: auto; }
       .donut-wrap { position: relative; width: min(280px, 100%); aspect-ratio: 1/1; margin: 0 auto; }
       .donut { width: 100%; height: 100%; overflow: visible; }
@@ -58,7 +54,6 @@
       .token-name { display: block; font-size: 16px; font-weight: 900; line-height: 1.1; color: #ffffff; }
       .token-amount { display: block; margin-top: 4px; font-size: 12px; font-weight: 700; color: rgba(232,242,255,0.78); }
       .token-percent { font-size: 22px; font-weight: 950; letter-spacing: -0.05em; color: #ffffff; }
-
       .roadmap-section { position: relative; z-index: 4; background: #07151b; overflow: hidden; }
       .roadmap-section::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 70px; z-index: 10; background: linear-gradient(to bottom, #000, transparent); pointer-events: none; }
       .roadmap-stage { position: relative; width: 100%; min-height: 100vh; overflow: hidden; background: #07151b; }
@@ -77,7 +72,6 @@
       .roadmap-phase-list { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
       .roadmap-phase-list li { position: relative; padding: 14px 14px 14px 42px; border-radius: 16px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(248,251,255,0.92); font-size: 14px; font-weight: 800; line-height: 1.38; }
       .roadmap-phase-list li::before { content: ""; position: absolute; left: 16px; top: 50%; width: 10px; height: 10px; transform: translateY(-50%); border-radius: 999px; background: #22d3ee; box-shadow: 0 0 18px rgba(34,211,238,0.7); }
-
       .merch-item { cursor: pointer; overflow: hidden; background: linear-gradient(135deg, rgba(34,211,238,0.18), rgba(16,185,129,0.16)), rgba(255,255,255,0.08) !important; border-color: rgba(34,211,238,0.35) !important; box-shadow: 0 0 24px rgba(34,211,238,0.12); transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
       .merch-item:hover { transform: translateX(6px); background: linear-gradient(135deg, rgba(34,211,238,0.28), rgba(16,185,129,0.22)), rgba(255,255,255,0.12) !important; border-color: rgba(103,232,249,0.6) !important; box-shadow: 0 0 34px rgba(34,211,238,0.22); }
       .merch-item::after { content: "VIEW"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 10px; font-weight: 950; letter-spacing: 0.16em; color: rgba(255,255,255,0.78); }
@@ -88,7 +82,6 @@
       .merch-preview-card img { width: 100%; height: auto; display: block; }
       .merch-preview-close { position: absolute; top: 16px; right: 16px; z-index: 2; width: 42px; height: 42px; border: none; border-radius: 999px; cursor: pointer; color: #fff; background: rgba(0,0,0,0.42); border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(10px); font-size: 24px; line-height: 1; transition: background 180ms ease, transform 180ms ease; }
       .merch-preview-close:hover { background: rgba(0,0,0,0.64); transform: scale(1.06); }
-
       @media (max-width: 1100px) {
         .gallery-section { height: 180vh; margin-top: -10vh; }
         .gallery-viewport { inset: -240px -180px -80px -180px; }
@@ -101,7 +94,6 @@
         .donut-wrap { width: min(320px, 80vw); }
         .roadmap-image { height: 100vh; }
       }
-
       @media (max-width: 640px) {
         .hero { height: 100svh; min-height: 100svh; background-image: url("./capibackgroundmobile.png"); background-size: cover; background-position: center center; background-repeat: no-repeat; background-color: #082f34; }
         .hero-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0.02) 65%, rgba(0,0,0,0.1)); }
@@ -142,7 +134,6 @@
       }
     </style>
   </head>
-
   <body>
     <main>
       <section class="hero" id="home">
@@ -150,9 +141,7 @@
         <header class="header">
           <h1 class="logo">CAPI</h1>
           <nav class="socials" aria-label="Social links">
-            <a class="social-link" href="https://x.com/capionsolana_" target="_blank" rel="noreferrer" aria-label="X">
-              <span class="x-icon">𝕏</span>
-            </a>
+            <a class="social-link" href="https://x.com/capionsolana_" target="_blank" rel="noreferrer" aria-label="X"><span class="x-icon">𝕏</span></a>
             <a class="social-link" href="https://t.me/capi_sol" target="_blank" rel="noreferrer" aria-label="Telegram">
               <svg class="tg-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M21.72 3.18a1.1 1.1 0 0 0-1.13-.17L2.82 10.02c-.5.2-.82.65-.82 1.17 0 .55.36 1.01.91 1.17l4.43 1.32 1.7 5.5c.14.45.5.78.96.86.46.09.91-.1 1.18-.49l2.43-3.46 4.8 3.55c.35.26.81.31 1.21.14.4-.18.67-.54.73-.98l1.8-14.55c.05-.42-.12-.83-.43-1.07ZM18.8 6.16 9.9 13.98l-.34 3.03-1.08-3.5 10.32-7.35Z" />
@@ -163,9 +152,7 @@
       </section>
 
       <section class="gallery-section" id="gallery" aria-label="CAPI photo wall">
-        <div class="gallery-viewport">
-          <div class="gallery-wall" id="gallery-wall"></div>
-        </div>
+        <div class="gallery-viewport"><div class="gallery-wall" id="gallery-wall"></div></div>
       </section>
 
       <section class="presale-section" id="presale">
@@ -174,21 +161,11 @@
 
           <!-- CLAIM CARD -->
           <div class="glass-card presale-card">
-            <h2 class="presale-title">
-              <span>CAPI</span>
-              <span>Token</span>
-              <span>Claim</span>
-            </h2>
-
+            <h2 class="presale-title"><span>CAPI</span><span>Token</span><span>Claim</span></h2>
             <div id="claim-connect" style="margin-top:24px">
-              <p style="font-size:13px;color:rgba(255,255,255,0.55);margin:0 0 16px;line-height:1.6">
-                Connect your wallet to check your pre-sale allocation and claim your $CAPI tokens.
-              </p>
-              <button id="claim-connect-btn" style="width:100%;padding:14px;background:linear-gradient(135deg,#3b82f6,#22d3ee);color:#fff;border:none;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;letter-spacing:0.02em">
-                Connect Wallet
-              </button>
+              <p style="font-size:13px;color:rgba(255,255,255,0.55);margin:0 0 16px;line-height:1.6">Connect your wallet to check your pre-sale allocation and claim your $CAPI tokens.</p>
+              <button id="claim-connect-btn" style="width:100%;padding:14px;background:linear-gradient(135deg,#3b82f6,#22d3ee);color:#fff;border:none;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;letter-spacing:0.02em">Connect Wallet</button>
             </div>
-
             <div id="claim-eligible" style="display:none;margin-top:20px">
               <div style="margin-bottom:16px">
                 <p style="font-size:11px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin:0 0 8px">Connected Wallet</p>
@@ -204,9 +181,7 @@
               <div id="claim-already" style="display:none;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:14px;text-align:center;margin-bottom:16px">
                 <p style="margin:0;font-size:13px;font-weight:900;color:#6ee7b7">&#10003; Tokens already claimed</p>
               </div>
-              <button id="claim-btn" style="width:100%;padding:14px;background:linear-gradient(135deg,#3b82f6,#22d3ee);color:#fff;border:none;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;letter-spacing:0.02em">
-                Claim $CAPI Tokens
-              </button>
+              <button id="claim-btn" style="width:100%;padding:14px;background:linear-gradient(135deg,#3b82f6,#22d3ee);color:#fff;border:none;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;letter-spacing:0.02em">Claim $CAPI Tokens</button>
               <div id="claim-tx" style="display:none;margin-top:12px;text-align:center">
                 <p style="margin:0 0 6px;font-size:13px;font-weight:900;color:#6ee7b7">&#10003; Claim successful!</p>
                 <a id="claim-tx-link" href="#" target="_blank" style="font-size:11px;font-family:monospace;color:#67e8f9">View transaction &rarr;</a>
@@ -214,11 +189,8 @@
               <div id="claim-error" style="display:none;margin-top:12px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:12px">
                 <p id="claim-error-msg" style="margin:0;font-size:12px;color:#fca5a5;word-break:break-word"></p>
               </div>
-              <button id="claim-disconnect-btn" style="width:100%;margin-top:12px;padding:10px;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.12);border-radius:12px;font-size:12px;font-weight:700;cursor:pointer">
-                Disconnect
-              </button>
+              <button id="claim-disconnect-btn" style="width:100%;margin-top:12px;padding:10px;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.12);border-radius:12px;font-size:12px;font-weight:700;cursor:pointer">Disconnect</button>
             </div>
-
             <div id="claim-not-eligible" style="display:none;margin-top:20px">
               <div style="margin-bottom:16px">
                 <p style="font-size:11px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin:0 0 8px">Connected Wallet</p>
@@ -230,9 +202,7 @@
                 <p style="font-size:15px;font-weight:900;color:#fca5a5;margin:0">&#10007; Not eligible</p>
                 <p style="font-size:12px;color:rgba(255,255,255,0.45);margin:8px 0 0">This wallet has no pre-sale allocation</p>
               </div>
-              <button id="claim-disconnect-btn-2" style="width:100%;padding:10px;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.12);border-radius:12px;font-size:12px;font-weight:700;cursor:pointer">
-                Try Different Wallet
-              </button>
+              <button id="claim-disconnect-btn-2" style="width:100%;padding:10px;background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.12);border-radius:12px;font-size:12px;font-weight:700;cursor:pointer">Try Different Wallet</button>
             </div>
           </div>
 
@@ -247,10 +217,7 @@
                   <circle class="donut-segment" data-token="team" cx="60" cy="60" r="45" pathLength="100" stroke="#06b6d4" stroke-dasharray="10 90" stroke-dashoffset="-80" transform="rotate(-90 60 60)" />
                   <circle class="donut-segment" data-token="marketing" cx="60" cy="60" r="45" pathLength="100" stroke="#0891b2" stroke-dasharray="10 90" stroke-dashoffset="-90" transform="rotate(-90 60 60)" />
                 </svg>
-                <div class="donut-center">
-                  <strong>10B</strong>
-                  <span>Total Supply</span>
-                </div>
+                <div class="donut-center"><strong>10B</strong><span>Total Supply</span></div>
               </div>
               <div class="tokenomics-list">
                 <button class="token-row active" type="button" data-token="liquidity">
@@ -306,296 +273,161 @@
 
     <script>
       /* GALLERY */
-      const galleryImages = [
-        "./images/capi-01.png","./images/capi-02.png","./images/capi-03.png",
-        "./images/capi-04.png","./images/capi-05.png","./images/capi-06.png",
-        "./images/capi-07.png","./images/capi-08.png","./images/capi-09.png",
-        "./images/capi-10.png","./images/capi-11.png","./images/capi-12.png",
-        "./images/capi-13.png","./images/capi-14.png","./images/capi-15.png",
-        "./images/capi-16.png","./images/capi-17.png","./images/capi-18.png",
-        "./images/capi-19.png","./images/capi-20.png","./images/capi-21.png",
-        "./images/capi-22.png","./images/capi-23.png","./images/capi-24.png"
-      ];
-      const COLS = 6;
-      const isMobile = window.innerWidth <= 640;
-      const ROWS = isMobile ? 8 : 6;
-      const TOTAL = COLS * ROWS;
-      const displayImages = [];
-      for (let i = 0; i < TOTAL; i++) displayImages.push(galleryImages[i % galleryImages.length]);
-      const galleryWall = document.getElementById("gallery-wall");
-      displayImages.forEach((src, index) => {
-        const tile = document.createElement("div");
-        tile.className = "tile";
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = "CAPI artwork " + ((index % galleryImages.length) + 1);
-        img.loading = index < 18 ? "eager" : "lazy";
-        img.decoding = "async";
-        img.onerror = function() { tile.style.background = "transparent"; img.style.display = "none"; };
-        tile.appendChild(img);
-        galleryWall.appendChild(tile);
-      });
+      var galleryImages = ["./images/capi-01.png","./images/capi-02.png","./images/capi-03.png","./images/capi-04.png","./images/capi-05.png","./images/capi-06.png","./images/capi-07.png","./images/capi-08.png","./images/capi-09.png","./images/capi-10.png","./images/capi-11.png","./images/capi-12.png","./images/capi-13.png","./images/capi-14.png","./images/capi-15.png","./images/capi-16.png","./images/capi-17.png","./images/capi-18.png","./images/capi-19.png","./images/capi-20.png","./images/capi-21.png","./images/capi-22.png","./images/capi-23.png","./images/capi-24.png"];
+      var COLS=6, isMobile=window.innerWidth<=640, ROWS=isMobile?8:6, TOTAL=COLS*ROWS, displayImages=[];
+      for(var i=0;i<TOTAL;i++) displayImages.push(galleryImages[i%galleryImages.length]);
+      var galleryWall=document.getElementById("gallery-wall");
+      displayImages.forEach(function(src,index){var tile=document.createElement("div");tile.className="tile";var img=document.createElement("img");img.src=src;img.alt="CAPI artwork "+((index%galleryImages.length)+1);img.loading=index<18?"eager":"lazy";img.decoding="async";img.onerror=function(){tile.style.background="transparent";img.style.display="none";};tile.appendChild(img);galleryWall.appendChild(tile);});
 
       /* TOKENOMICS */
-      const tokenRows = document.querySelectorAll(".token-row");
-      const donutSegments = document.querySelectorAll(".donut-segment");
-      function setActiveToken(token) {
-        tokenRows.forEach(function(row) { row.classList.toggle("active", row.dataset.token === token); });
-        donutSegments.forEach(function(seg) { seg.classList.toggle("active", seg.dataset.token === token); });
-      }
-      tokenRows.forEach(function(row) {
-        row.addEventListener("mouseenter", function() { setActiveToken(row.dataset.token); });
-        row.addEventListener("click", function() { setActiveToken(row.dataset.token); });
-      });
-      donutSegments.forEach(function(seg) {
-        seg.addEventListener("mouseenter", function() { setActiveToken(seg.dataset.token); });
-        seg.addEventListener("click", function() { setActiveToken(seg.dataset.token); });
-      });
+      var tokenRows=document.querySelectorAll(".token-row"),donutSegments=document.querySelectorAll(".donut-segment");
+      function setActiveToken(token){tokenRows.forEach(function(r){r.classList.toggle("active",r.dataset.token===token);});donutSegments.forEach(function(s){s.classList.toggle("active",s.dataset.token===token);});}
+      tokenRows.forEach(function(r){r.addEventListener("mouseenter",function(){setActiveToken(r.dataset.token);});r.addEventListener("click",function(){setActiveToken(r.dataset.token);});});
+      donutSegments.forEach(function(s){s.addEventListener("mouseenter",function(){setActiveToken(s.dataset.token);});s.addEventListener("click",function(){setActiveToken(s.dataset.token);});});
       setActiveToken("liquidity");
 
       /* ROADMAP */
-      const roadmapData = {
-        phase1: { label:"Phase 1", title:"Foundation", items:["Website launch","X / Telegram setup","Brand identity","Initial community build"] },
-        phase2: { label:"Phase 2", title:"Pre-Sale", items:["Pre-sale launch","Early supporter rewards","Community growth","Marketing push"] },
-        phase3: { label:"Phase 3", title:"Launch", items:["Launch $CAPI","Major CEX listings","Marketing & ADs for $CAPI","Community governance launch"] },
-        phase4: { label:"Phase 4", title:"Expansion", items:["NFT collection",{text:"Merchandise",type:"merch"},"Features for holders including free rewards","Ecosystem development & long-term expansion"] }
-      };
-      const roadmapPins = document.querySelectorAll(".roadmap-pin");
-      const roadmapCard = document.getElementById("roadmap-phase-card");
-      const roadmapClose = document.getElementById("roadmap-close");
-      const roadmapPhaseLabel = document.getElementById("roadmap-phase-label");
-      const roadmapPhaseTitle = document.getElementById("roadmap-phase-title");
-      const roadmapPhaseList = document.getElementById("roadmap-phase-list");
-      const merchPreview = document.getElementById("merch-preview");
-      const merchPreviewClose = document.getElementById("merch-preview-close");
-      function openMerchPreview() { merchPreview.classList.add("show"); merchPreview.setAttribute("aria-hidden","false"); }
-      function closeMerchPreview() { merchPreview.classList.remove("show"); merchPreview.setAttribute("aria-hidden","true"); }
-      merchPreviewClose.addEventListener("click", closeMerchPreview);
-      merchPreview.addEventListener("click", function(e) { if (e.target === merchPreview) closeMerchPreview(); });
-      document.addEventListener("keydown", function(e) { if (e.key === "Escape") closeMerchPreview(); });
-      function openRoadmapPhase(phaseKey) {
-        const phase = roadmapData[phaseKey];
-        if (!phase) return;
-        roadmapPins.forEach(function(pin) { pin.classList.toggle("active", pin.dataset.phase === phaseKey); });
-        roadmapPhaseLabel.textContent = phase.label;
-        roadmapPhaseTitle.textContent = phase.title;
-        roadmapPhaseList.innerHTML = "";
-        phase.items.forEach(function(item) {
-          const li = document.createElement("li");
-          li.textContent = typeof item === "string" ? item : item.text;
-          if (typeof item === "object" && item.type === "merch") {
-            li.classList.add("merch-item"); li.setAttribute("role","button"); li.setAttribute("tabindex","0");
-            li.addEventListener("mouseenter", openMerchPreview);
-            li.addEventListener("click", openMerchPreview);
-            li.addEventListener("keydown", function(e) { if (e.key==="Enter"||e.key===" ") { e.preventDefault(); openMerchPreview(); } });
-          }
-          roadmapPhaseList.appendChild(li);
-        });
-        roadmapCard.classList.add("show");
-      }
-      function closeRoadmapPhase() { roadmapCard.classList.remove("show"); roadmapPins.forEach(function(pin) { pin.classList.remove("active"); }); }
-      roadmapPins.forEach(function(pin) { pin.addEventListener("click", function() { openRoadmapPhase(pin.dataset.phase); }); });
-      roadmapClose.addEventListener("click", closeRoadmapPhase);
+      var roadmapData={phase1:{label:"Phase 1",title:"Foundation",items:["Website launch","X / Telegram setup","Brand identity","Initial community build"]},phase2:{label:"Phase 2",title:"Pre-Sale",items:["Pre-sale launch","Early supporter rewards","Community growth","Marketing push"]},phase3:{label:"Phase 3",title:"Launch",items:["Launch $CAPI","Major CEX listings","Marketing & ADs for $CAPI","Community governance launch"]},phase4:{label:"Phase 4",title:"Expansion",items:["NFT collection",{text:"Merchandise",type:"merch"},"Features for holders including free rewards","Ecosystem development & long-term expansion"]}};
+      var roadmapPins=document.querySelectorAll(".roadmap-pin"),roadmapCard=document.getElementById("roadmap-phase-card"),roadmapClose=document.getElementById("roadmap-close"),roadmapPhaseLabel=document.getElementById("roadmap-phase-label"),roadmapPhaseTitle=document.getElementById("roadmap-phase-title"),roadmapPhaseList=document.getElementById("roadmap-phase-list"),merchPreview=document.getElementById("merch-preview"),merchPreviewClose=document.getElementById("merch-preview-close");
+      function openMerchPreview(){merchPreview.classList.add("show");merchPreview.setAttribute("aria-hidden","false");}
+      function closeMerchPreview(){merchPreview.classList.remove("show");merchPreview.setAttribute("aria-hidden","true");}
+      merchPreviewClose.addEventListener("click",closeMerchPreview);
+      merchPreview.addEventListener("click",function(e){if(e.target===merchPreview)closeMerchPreview();});
+      document.addEventListener("keydown",function(e){if(e.key==="Escape")closeMerchPreview();});
+      function openRoadmapPhase(k){var p=roadmapData[k];if(!p)return;roadmapPins.forEach(function(pin){pin.classList.toggle("active",pin.dataset.phase===k);});roadmapPhaseLabel.textContent=p.label;roadmapPhaseTitle.textContent=p.title;roadmapPhaseList.innerHTML="";p.items.forEach(function(item){var li=document.createElement("li");li.textContent=typeof item==="string"?item:item.text;if(typeof item==="object"&&item.type==="merch"){li.classList.add("merch-item");li.setAttribute("role","button");li.setAttribute("tabindex","0");li.addEventListener("mouseenter",openMerchPreview);li.addEventListener("click",openMerchPreview);li.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openMerchPreview();}});}roadmapPhaseList.appendChild(li);});roadmapCard.classList.add("show");}
+      function closeRoadmapPhase(){roadmapCard.classList.remove("show");roadmapPins.forEach(function(p){p.classList.remove("active");});}
+      roadmapPins.forEach(function(pin){pin.addEventListener("click",function(){openRoadmapPhase(pin.dataset.phase);});});
+      roadmapClose.addEventListener("click",closeRoadmapPhase);
 
-      /* CLAIM - dynamicky nacte solana web3 */
-      (function() {
-        var s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js';
-        s.onload = initClaim;
-        s.onerror = function() {
-          var s2 = document.createElement('script');
-          s2.src = 'https://unpkg.com/@solana/web3.js@1.95.3/lib/index.iife.min.js';
-          s2.onload = initClaim;
-          document.head.appendChild(s2);
-        };
+      /* CLAIM */
+      (function(){
+        var s=document.createElement('script');
+        s.src='https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js';
+        s.onload=initClaim;
+        s.onerror=function(){var s2=document.createElement('script');s2.src='https://unpkg.com/@solana/web3.js@1.95.3/lib/index.iife.min.js';s2.onload=initClaim;document.head.appendChild(s2);};
         document.head.appendChild(s);
       })();
 
-      function initClaim() {
-        var PROGRAM_ID = 'FyfMZ7iQT8wF5AD5oTZ8k7R2HZpjUFZSgN2m5LiYBEYq';
-        var MINT_STR = 'VFEAugy5TqFDeGUcRQ1KA7jqNoG1sjF8LaZApVBaXbg';
-        var RPC = 'https://api.mainnet-beta.solana.com';
-        var TOKEN_PROGRAM = new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
-        var ASSOC_TOKEN = new solanaWeb3.PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJe1bLT');
-        var merkleTree = null;
-        var walletPubkey = null;
-        var walletAdapter = null;
+      function initClaim(){
+        var PROGRAM_ID='FyfMZ7iQT8wF5AD5oTZ8k7R2HZpjUFZSgN2m5LiYBEYq';
+        var MINT_STR='VFEAugy5TqFDeGUcRQ1KA7jqNoG1sjF8LaZApVBaXbg';
+        var RPC='https://api.mainnet-beta.solana.com';
+        var TOKEN_PROGRAM=new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+        var ASSOC_TOKEN=new solanaWeb3.PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJe1bLT');
+        var merkleTree=null, walletPubkey=null, walletAdapter=null;
 
+        /* KLICOVA OPRAVA: spravny fetch s .then() chainem */
         fetch('https://raw.githubusercontent.com/edgeoddsbots-cell/capionsol/main/merkle-tree.json')
+          .then(function(r){return r.json();})
+          .then(function(d){merkleTree=d;console.log('Merkle tree loaded, claims:',Object.keys(d.claims).length);})
+          .catch(function(e){console.error('Failed to load merkle tree:',e);});
 
-        function $(id) { return document.getElementById(id); }
+        function $(id){return document.getElementById(id);}
 
-        function showSection(s) {
-          $('claim-connect').style.display = 'none';
-          $('claim-eligible').style.display = 'none';
-          $('claim-not-eligible').style.display = 'none';
-          if (s === 'connect') $('claim-connect').style.display = 'block';
-          if (s === 'eligible') $('claim-eligible').style.display = 'block';
-          if (s === 'not-eligible') $('claim-not-eligible').style.display = 'block';
+        function showSection(s){
+          $('claim-connect').style.display='none';
+          $('claim-eligible').style.display='none';
+          $('claim-not-eligible').style.display='none';
+          if(s==='connect') $('claim-connect').style.display='block';
+          if(s==='eligible') $('claim-eligible').style.display='block';
+          if(s==='not-eligible') $('claim-not-eligible').style.display='block';
         }
 
-        function formatAmount(raw) {
-          return (Number(BigInt(raw)) / 1e9).toLocaleString('en-US', { maximumFractionDigits: 0 });
-        }
+        function formatAmount(raw){return (Number(BigInt(raw))/1e9).toLocaleString('en-US',{maximumFractionDigits:0});}
 
-        function getATA(owner, mint) {
-          var res = solanaWeb3.PublicKey.findProgramAddressSync(
-            [owner.toBytes(), TOKEN_PROGRAM.toBytes(), mint.toBytes()], ASSOC_TOKEN
-          );
-          return res[0];
-        }
+        function getATA(owner,mint){return solanaWeb3.PublicKey.findProgramAddressSync([owner.toBytes(),TOKEN_PROGRAM.toBytes(),mint.toBytes()],ASSOC_TOKEN)[0];}
 
-        function checkClaimed(walletAddr) {
-          return new Promise(function(resolve) {
-            try {
-              var conn = new solanaWeb3.Connection(RPC, 'confirmed');
-              var programId = new solanaWeb3.PublicKey(PROGRAM_ID);
-              var mint = new solanaWeb3.PublicKey(MINT_STR);
-              var wallet = new solanaWeb3.PublicKey(walletAddr);
-              var distPda = solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('distributor'), mint.toBytes()], programId)[0];
-              var claimRecord = solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('claim'), distPda.toBytes(), wallet.toBytes()], programId)[0];
-              conn.getAccountInfo(claimRecord).then(function(info) { resolve(!!info); }).catch(function() { resolve(false); });
-            } catch(e) { resolve(false); }
+        function checkClaimed(addr){
+          return new Promise(function(resolve){
+            try{
+              var conn=new solanaWeb3.Connection(RPC,'confirmed');
+              var pid=new solanaWeb3.PublicKey(PROGRAM_ID);
+              var mint=new solanaWeb3.PublicKey(MINT_STR);
+              var w=new solanaWeb3.PublicKey(addr);
+              var dist=solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('distributor'),mint.toBytes()],pid)[0];
+              var rec=solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('claim'),dist.toBytes(),w.toBytes()],pid)[0];
+              conn.getAccountInfo(rec).then(function(info){resolve(!!info);}).catch(function(){resolve(false);});
+            }catch(e){resolve(false);}
           });
         }
 
-        function connectWallet() {
-          var btn = $('claim-connect-btn');
-          btn.textContent = 'Connecting...';
-          btn.style.opacity = '0.6';
-          var phantom = window.solana || (window.phantom && window.phantom.solana);
-          if (!phantom || !phantom.isPhantom) {
-            alert('Please install Phantom wallet from phantom.app');
-            btn.textContent = 'Connect Wallet';
-            btn.style.opacity = '1';
-            return;
-          }
-          phantom.connect().then(function(resp) {
-            walletPubkey = resp.publicKey.toString();
-            walletAdapter = phantom;
-            var allocation = merkleTree && merkleTree.claims && merkleTree.claims[walletPubkey];
-            $('claim-wallet-addr').textContent = walletPubkey.slice(0,8) + '...' + walletPubkey.slice(-8);
-            $('claim-wallet-addr-2').textContent = walletPubkey.slice(0,8) + '...' + walletPubkey.slice(-8);
-            if (allocation) {
-              $('claim-amount').textContent = formatAmount(allocation.amount);
-              checkClaimed(walletPubkey).then(function(claimed) {
-                if (claimed) {
-                  $('claim-already').style.display = 'block';
-                  $('claim-btn').style.display = 'none';
-                } else {
-                  $('claim-already').style.display = 'none';
-                  $('claim-btn').style.display = 'block';
-                }
+        function connectWallet(){
+          var btn=$('claim-connect-btn');
+          btn.textContent='Connecting...';
+          btn.style.opacity='0.6';
+          var phantom=window.solana||(window.phantom&&window.phantom.solana);
+          if(!phantom||!phantom.isPhantom){alert('Please install Phantom wallet from phantom.app');btn.textContent='Connect Wallet';btn.style.opacity='1';return;}
+          phantom.connect().then(function(resp){
+            walletPubkey=resp.publicKey.toString();
+            walletAdapter=phantom;
+            console.log('Connected wallet:',walletPubkey);
+            console.log('Merkle tree ready:',!!merkleTree);
+            var allocation=merkleTree&&merkleTree.claims&&merkleTree.claims[walletPubkey];
+            console.log('Allocation found:',!!allocation);
+            $('claim-wallet-addr').textContent=walletPubkey.slice(0,8)+'...'+walletPubkey.slice(-8);
+            $('claim-wallet-addr-2').textContent=walletPubkey.slice(0,8)+'...'+walletPubkey.slice(-8);
+            if(allocation){
+              $('claim-amount').textContent=formatAmount(allocation.amount);
+              checkClaimed(walletPubkey).then(function(claimed){
+                if(claimed){$('claim-already').style.display='block';$('claim-btn').style.display='none';}
+                else{$('claim-already').style.display='none';$('claim-btn').style.display='block';}
                 showSection('eligible');
               });
-            } else {
-              showSection('not-eligible');
-            }
-          }).catch(function() {
-            btn.textContent = 'Connect Wallet';
-            btn.style.opacity = '1';
-          });
+            }else{showSection('not-eligible');}
+          }).catch(function(){btn.textContent='Connect Wallet';btn.style.opacity='1';});
         }
 
-        function claimTokens() {
-          var btn = $('claim-btn');
-          $('claim-error').style.display = 'none';
-          btn.textContent = 'Claiming...';
-          btn.style.opacity = '0.6';
-          btn.disabled = true;
-
-          var conn = new solanaWeb3.Connection(RPC, 'confirmed');
-          var programId = new solanaWeb3.PublicKey(PROGRAM_ID);
-          var mint = new solanaWeb3.PublicKey(MINT_STR);
-          var wallet = new solanaWeb3.PublicKey(walletPubkey);
-          var allocation = merkleTree.claims[walletPubkey];
-          var distPda = solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('distributor'), mint.toBytes()], programId)[0];
-          var claimRecord = solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('claim'), distPda.toBytes(), wallet.toBytes()], programId)[0];
-          var vault = getATA(distPda, mint);
-          var claimantAta = getATA(wallet, mint);
-
-          conn.getLatestBlockhash().then(function(bh) {
-            var tx = new solanaWeb3.Transaction();
-            tx.recentBlockhash = bh.blockhash;
-            tx.feePayer = wallet;
-
-            return conn.getAccountInfo(claimantAta).then(function(ataInfo) {
-              if (!ataInfo) {
-                tx.add(new solanaWeb3.TransactionInstruction({
-                  keys: [
-                    { pubkey: wallet, isSigner: true, isWritable: true },
-                    { pubkey: claimantAta, isSigner: false, isWritable: true },
-                    { pubkey: wallet, isSigner: false, isWritable: false },
-                    { pubkey: mint, isSigner: false, isWritable: false },
-                    { pubkey: solanaWeb3.SystemProgram.programId, isSigner: false, isWritable: false },
-                    { pubkey: TOKEN_PROGRAM, isSigner: false, isWritable: false },
-                  ],
-                  programId: ASSOC_TOKEN,
-                  data: Buffer.alloc(0)
-                }));
-              }
-
-              var amount = BigInt(allocation.amount);
-              var proof = allocation.proof.map(function(p) { return Buffer.from(p, 'hex'); });
-              var discriminator = Buffer.from([62, 198, 214, 193, 213, 159, 108, 210]);
-              var amountBuf = Buffer.alloc(8);
-              amountBuf.writeBigUInt64LE(amount);
-              var proofLenBuf = Buffer.alloc(4);
-              proofLenBuf.writeUInt32LE(proof.length);
-              var data = Buffer.concat([discriminator, amountBuf, proofLenBuf].concat(proof));
-
-              tx.add(new solanaWeb3.TransactionInstruction({
-                keys: [
-                  { pubkey: distPda, isSigner: false, isWritable: true },
-                  { pubkey: claimRecord, isSigner: false, isWritable: true },
-                  { pubkey: vault, isSigner: false, isWritable: true },
-                  { pubkey: claimantAta, isSigner: false, isWritable: true },
-                  { pubkey: wallet, isSigner: true, isWritable: true },
-                  { pubkey: TOKEN_PROGRAM, isSigner: false, isWritable: false },
-                  { pubkey: solanaWeb3.SystemProgram.programId, isSigner: false, isWritable: false },
-                  { pubkey: solanaWeb3.SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false },
-                ],
-                programId: programId,
-                data: data
-              }));
-
+        function claimTokens(){
+          var btn=$('claim-btn');
+          $('claim-error').style.display='none';
+          btn.textContent='Claiming...';btn.style.opacity='0.6';btn.disabled=true;
+          var conn=new solanaWeb3.Connection(RPC,'confirmed');
+          var pid=new solanaWeb3.PublicKey(PROGRAM_ID);
+          var mint=new solanaWeb3.PublicKey(MINT_STR);
+          var wallet=new solanaWeb3.PublicKey(walletPubkey);
+          var allocation=merkleTree.claims[walletPubkey];
+          var dist=solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('distributor'),mint.toBytes()],pid)[0];
+          var rec=solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('claim'),dist.toBytes(),wallet.toBytes()],pid)[0];
+          var vault=getATA(dist,mint);
+          var claimantAta=getATA(wallet,mint);
+          conn.getLatestBlockhash().then(function(bh){
+            var tx=new solanaWeb3.Transaction();
+            tx.recentBlockhash=bh.blockhash;tx.feePayer=wallet;
+            return conn.getAccountInfo(claimantAta).then(function(ataInfo){
+              if(!ataInfo){tx.add(new solanaWeb3.TransactionInstruction({keys:[{pubkey:wallet,isSigner:true,isWritable:true},{pubkey:claimantAta,isSigner:false,isWritable:true},{pubkey:wallet,isSigner:false,isWritable:false},{pubkey:mint,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},{pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false}],programId:ASSOC_TOKEN,data:Buffer.alloc(0)}));}
+              var amount=BigInt(allocation.amount);
+              var proof=allocation.proof.map(function(p){return Buffer.from(p,'hex');});
+              var discriminator=Buffer.from([62,198,214,193,213,159,108,210]);
+              var amountBuf=Buffer.alloc(8);amountBuf.writeBigUInt64LE(amount);
+              var proofLenBuf=Buffer.alloc(4);proofLenBuf.writeUInt32LE(proof.length);
+              var data=Buffer.concat([discriminator,amountBuf,proofLenBuf].concat(proof));
+              tx.add(new solanaWeb3.TransactionInstruction({keys:[{pubkey:dist,isSigner:false,isWritable:true},{pubkey:rec,isSigner:false,isWritable:true},{pubkey:vault,isSigner:false,isWritable:true},{pubkey:claimantAta,isSigner:false,isWritable:true},{pubkey:wallet,isSigner:true,isWritable:true},{pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SYSVAR_RENT_PUBKEY,isSigner:false,isWritable:false}],programId:pid,data:data}));
               return walletAdapter.signTransaction(tx);
-            }).then(function(signed) {
-              return conn.sendRawTransaction(signed.serialize(), { skipPreflight: true });
-            }).then(function(sig) {
-              return conn.confirmTransaction({ signature: sig, blockhash: bh.blockhash, lastValidBlockHeight: bh.lastValidBlockHeight }, 'confirmed').then(function() { return sig; });
-            });
-          }).then(function(sig) {
-            $('claim-tx-link').href = 'https://solscan.io/tx/' + sig;
-            $('claim-tx').style.display = 'block';
-            $('claim-btn').style.display = 'none';
-          }).catch(function(e) {
-            $('claim-error-msg').textContent = (e && e.message) || 'Something went wrong';
-            $('claim-error').style.display = 'block';
-            btn.textContent = 'Claim $CAPI Tokens';
-            btn.style.opacity = '1';
-            btn.disabled = false;
+            }).then(function(signed){return conn.sendRawTransaction(signed.serialize(),{skipPreflight:true});})
+            .then(function(sig){return conn.confirmTransaction({signature:sig,blockhash:bh.blockhash,lastValidBlockHeight:bh.lastValidBlockHeight},'confirmed').then(function(){return sig;});});
+          }).then(function(sig){
+            $('claim-tx-link').href='https://solscan.io/tx/'+sig;
+            $('claim-tx').style.display='block';$('claim-btn').style.display='none';
+          }).catch(function(e){
+            $('claim-error-msg').textContent=(e&&e.message)||'Something went wrong';
+            $('claim-error').style.display='block';
+            btn.textContent='Claim $CAPI Tokens';btn.style.opacity='1';btn.disabled=false;
           });
         }
 
-        function disconnect() {
-          walletPubkey = null;
-          walletAdapter = null;
-          try { if (window.solana) window.solana.disconnect(); } catch(e) {}
+        function disconnect(){
+          walletPubkey=null;walletAdapter=null;
+          try{if(window.solana)window.solana.disconnect();}catch(e){}
           showSection('connect');
-          $('claim-connect-btn').textContent = 'Connect Wallet';
-          $('claim-connect-btn').style.opacity = '1';
-          $('claim-tx').style.display = 'none';
-          $('claim-error').style.display = 'none';
-          $('claim-already').style.display = 'none';
-          $('claim-btn').style.display = 'block';
-          $('claim-btn').disabled = false;
+          $('claim-connect-btn').textContent='Connect Wallet';$('claim-connect-btn').style.opacity='1';
+          $('claim-tx').style.display='none';$('claim-error').style.display='none';
+          $('claim-already').style.display='none';$('claim-btn').style.display='block';$('claim-btn').disabled=false;
         }
 
-        $('claim-connect-btn').addEventListener('click', connectWallet);
-        $('claim-btn').addEventListener('click', claimTokens);
-        $('claim-disconnect-btn').addEventListener('click', disconnect);
-        $('claim-disconnect-btn-2').addEventListener('click', disconnect);
+        $('claim-connect-btn').addEventListener('click',connectWallet);
+        $('claim-btn').addEventListener('click',claimTokens);
+        $('claim-disconnect-btn').addEventListener('click',disconnect);
+        $('claim-disconnect-btn-2').addEventListener('click',disconnect);
       }
     </script>
   </body>
