@@ -392,7 +392,7 @@
             tx.recentBlockhash=bh.blockhash;tx.feePayer=wallet;
 
             return conn.getAccountInfo(claimantAta).then(function(ataInfo){
-              if(!ataInfo){
+  if(false){
                 /* Create ATA instruction */
                 tx.add(new solanaWeb3.TransactionInstruction({
                   keys:[
@@ -404,7 +404,7 @@
                     {pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false},
                     {pubkey:solanaWeb3.SYSVAR_RENT_PUBKEY,isSigner:false,isWritable:false}
                   ],
-                  programId:ASSOC_TOKEN,
+                  programId:new solanaWeb3.PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJe1bLT'),
                   data:Buf.alloc(0)
                 }));
               }
