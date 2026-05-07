@@ -300,16 +300,13 @@
 
         fetch('https://raw.githubusercontent.com/edgeoddsbots-cell/capionsol/main/merkle-tree.json')
           .then(function(r){return r.json();})
-          .then(function(d){merkleTree=d;console.log('Merkle tree loaded:',Object.keys(d.claims).length,'claims');})
+          .then(function(d){merkleTree=d;})
           .catch(function(e){console.error('Failed to load merkle tree:',e);});
 
         function $(id){return document.getElementById(id);}
         function showSection(s){$('claim-connect').style.display='none';$('claim-eligible').style.display='none';$('claim-not-eligible').style.display='none';if(s==='connect')$('claim-connect').style.display='block';if(s==='eligible')$('claim-eligible').style.display='block';if(s==='not-eligible')$('claim-not-eligible').style.display='block';}
         function formatAmount(raw){return (Number(BigInt(raw))/1e9).toLocaleString('en-US',{maximumFractionDigits:0});}
-        function getATA(owner,mint){
-  var TOKEN_PROGRAM_ID=new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
-  return solanaWeb3.PublicKey.findProgramAddressSync([owner.toBytes(),TOKEN_PROGRAM_ID.toBytes(),mint.toBytes()],ASSOC_TOKEN)[0];
-}
+        function getATA(owner,mint){return solanaWeb3.PublicKey.findProgramAddressSync([owner.toBytes(),TOKEN_PROGRAM.toBytes(),mint.toBytes()],ASSOC_TOKEN)[0];}
 
         function checkClaimed(addr){
           return new Promise(function(resolve){
@@ -332,7 +329,6 @@
           if(!phantom||!phantom.isPhantom){alert('Please install Phantom wallet from phantom.app');btn.textContent='Connect Wallet';btn.style.opacity='1';return;}
           phantom.connect().then(function(resp){
             walletPubkey=resp.publicKey.toString();
-            console.log('Computed ATA:', getATA(new solanaWeb3.PublicKey(resp.publicKey.toString()), new solanaWeb3.PublicKey(MINT_STR)).toString());
             walletAdapter=phantom;
             var allocation=merkleTree&&merkleTree.claims&&merkleTree.claims[walletPubkey];
             $('claim-wallet-addr').textContent=walletPubkey.slice(0,8)+'...'+walletPubkey.slice(-8);
@@ -364,11 +360,27 @@
 
           conn.getLatestBlockhash().then(function(bh){
             var tx=new solanaWeb3.Transaction();
-            tx.recentBlockhash=bh.blockhash;tx.feePayer=wallet;
+            tx.recentBlockhash=bh.blockhash;
+            tx.feePayer=wallet;
 
-return conn.getAccountInfo(claimantAta).then(function(ataInfo){
-  if(false){/* ATA creation disabled */}
+            /* Create ATA if it doesn't exist */
+            return conn.getAccountInfo(claimantAta).then(function(ataInfo){
+              if(!ataInfo){
+                tx.add(new solanaWeb3.TransactionInstruction({
+                  keys:[
+                    {pubkey:wallet,isSigner:true,isWritable:true},
+                    {pubkey:claimantAta,isSigner:false,isWritable:true},
+                    {pubkey:wallet,isSigner:false,isWritable:false},
+                    {pubkey:mint,isSigner:false,isWritable:false},
+                    {pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},
+                    {pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false}
+                  ],
+                  programId:ASSOC_TOKEN,
+                  data:Buf.alloc(0)
+                }));
+              }
 
+              /* Claim instruction */
               var amount=BigInt(allocation.amount);
               var proof=allocation.proof.map(function(p){return Buf.from(p,'hex');});
               var discriminator=Buf.from([62,198,214,193,213,159,108,210]);
@@ -399,7 +411,8 @@ return conn.getAccountInfo(claimantAta).then(function(ataInfo){
             });
           }).then(function(sig){
             $('claim-tx-link').href='https://solscan.io/tx/'+sig;
-            $('claim-tx').style.display='block';$('claim-btn').style.display='none';
+            $('claim-tx').style.display='block';
+            $('claim-btn').style.display='none';
           }).catch(function(e){
             $('claim-error-msg').textContent=(e&&e.message)||'Something went wrong';
             $('claim-error').style.display='block';
