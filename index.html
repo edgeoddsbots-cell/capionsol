@@ -421,7 +421,7 @@
         var walletPubkey = null;
         var walletAdapter = null;
 
-        fetch('./merkle-tree.json').then(function(r) { return r.json(); }).then(function(d) { merkleTree = d; }).catch(function() {});
+        fetch('https://raw.githubusercontent.com/edgeoddsbots-cell/capionsol/main/merkle-tree.json')
 
         function $(id) { return document.getElementById(id); }
 
