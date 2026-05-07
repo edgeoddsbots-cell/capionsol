@@ -360,7 +360,7 @@
           var dist=solanaWeb3.PublicKey.findProgramAddressSync([Buf.from('distributor'),mint.toBytes()],pid)[0];
           var rec=solanaWeb3.PublicKey.findProgramAddressSync([Buf.from('claim'),dist.toBytes(),wallet.toBytes()],pid)[0];
           var vault=new solanaWeb3.PublicKey(VAULT);
-          var claimantAta=new solanaWeb3.PublicKey('4KTNSwr9rnBJJV7stdKbttxDuexuURLWZyUSxp1CJV1n');
+          var claimantAta=getATA(wallet,mint);
 
           conn.getLatestBlockhash().then(function(bh){
             var tx=new solanaWeb3.Transaction();
