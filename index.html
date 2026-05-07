@@ -158,8 +158,6 @@
       <section class="presale-section" id="presale">
         <div class="presale-bg"></div>
         <div class="presale-content">
-
-          <!-- CLAIM CARD -->
           <div class="glass-card presale-card">
             <h2 class="presale-title"><span>CAPI</span><span>Token</span><span>Claim</span></h2>
             <div id="claim-connect" style="margin-top:24px">
@@ -206,7 +204,6 @@
             </div>
           </div>
 
-          <!-- TOKENOMICS CARD -->
           <div class="glass-card tokenomics-card">
             <h2 class="tokenomics-title">Tokenomics</h2>
             <div class="tokenomics-layout">
@@ -220,30 +217,13 @@
                 <div class="donut-center"><strong>10B</strong><span>Total Supply</span></div>
               </div>
               <div class="tokenomics-list">
-                <button class="token-row active" type="button" data-token="liquidity">
-                  <span class="token-color" style="background:#3b82f6"></span>
-                  <span><span class="token-name">Liquidity Pool</span><span class="token-amount">5B tokens</span></span>
-                  <span class="token-percent">50%</span>
-                </button>
-                <button class="token-row" type="button" data-token="presale">
-                  <span class="token-color" style="background:#22d3ee"></span>
-                  <span><span class="token-name">Pre-sale</span><span class="token-amount">3B tokens</span></span>
-                  <span class="token-percent">30%</span>
-                </button>
-                <button class="token-row" type="button" data-token="team">
-                  <span class="token-color" style="background:#06b6d4"></span>
-                  <span><span class="token-name">DEVs &amp; Team</span><span class="token-amount">1B tokens</span></span>
-                  <span class="token-percent">10%</span>
-                </button>
-                <button class="token-row" type="button" data-token="marketing">
-                  <span class="token-color" style="background:#0891b2"></span>
-                  <span><span class="token-name">Marketing Wallets</span><span class="token-amount">1B tokens</span></span>
-                  <span class="token-percent">10%</span>
-                </button>
+                <button class="token-row active" type="button" data-token="liquidity"><span class="token-color" style="background:#3b82f6"></span><span><span class="token-name">Liquidity Pool</span><span class="token-amount">5B tokens</span></span><span class="token-percent">50%</span></button>
+                <button class="token-row" type="button" data-token="presale"><span class="token-color" style="background:#22d3ee"></span><span><span class="token-name">Pre-sale</span><span class="token-amount">3B tokens</span></span><span class="token-percent">30%</span></button>
+                <button class="token-row" type="button" data-token="team"><span class="token-color" style="background:#06b6d4"></span><span><span class="token-name">DEVs &amp; Team</span><span class="token-amount">1B tokens</span></span><span class="token-percent">10%</span></button>
+                <button class="token-row" type="button" data-token="marketing"><span class="token-color" style="background:#0891b2"></span><span><span class="token-name">Marketing Wallets</span><span class="token-amount">1B tokens</span></span><span class="token-percent">10%</span></button>
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -272,21 +252,18 @@
     </main>
 
     <script>
-      /* GALLERY */
-      var galleryImages = ["./images/capi-01.png","./images/capi-02.png","./images/capi-03.png","./images/capi-04.png","./images/capi-05.png","./images/capi-06.png","./images/capi-07.png","./images/capi-08.png","./images/capi-09.png","./images/capi-10.png","./images/capi-11.png","./images/capi-12.png","./images/capi-13.png","./images/capi-14.png","./images/capi-15.png","./images/capi-16.png","./images/capi-17.png","./images/capi-18.png","./images/capi-19.png","./images/capi-20.png","./images/capi-21.png","./images/capi-22.png","./images/capi-23.png","./images/capi-24.png"];
-      var COLS=6, isMobile=window.innerWidth<=640, ROWS=isMobile?8:6, TOTAL=COLS*ROWS, displayImages=[];
+      var galleryImages=["./images/capi-01.png","./images/capi-02.png","./images/capi-03.png","./images/capi-04.png","./images/capi-05.png","./images/capi-06.png","./images/capi-07.png","./images/capi-08.png","./images/capi-09.png","./images/capi-10.png","./images/capi-11.png","./images/capi-12.png","./images/capi-13.png","./images/capi-14.png","./images/capi-15.png","./images/capi-16.png","./images/capi-17.png","./images/capi-18.png","./images/capi-19.png","./images/capi-20.png","./images/capi-21.png","./images/capi-22.png","./images/capi-23.png","./images/capi-24.png"];
+      var COLS=6,isMobile=window.innerWidth<=640,ROWS=isMobile?8:6,TOTAL=COLS*ROWS,displayImages=[];
       for(var i=0;i<TOTAL;i++) displayImages.push(galleryImages[i%galleryImages.length]);
       var galleryWall=document.getElementById("gallery-wall");
       displayImages.forEach(function(src,index){var tile=document.createElement("div");tile.className="tile";var img=document.createElement("img");img.src=src;img.alt="CAPI artwork "+((index%galleryImages.length)+1);img.loading=index<18?"eager":"lazy";img.decoding="async";img.onerror=function(){tile.style.background="transparent";img.style.display="none";};tile.appendChild(img);galleryWall.appendChild(tile);});
 
-      /* TOKENOMICS */
       var tokenRows=document.querySelectorAll(".token-row"),donutSegments=document.querySelectorAll(".donut-segment");
-      function setActiveToken(token){tokenRows.forEach(function(r){r.classList.toggle("active",r.dataset.token===token);});donutSegments.forEach(function(s){s.classList.toggle("active",s.dataset.token===token);});}
+      function setActiveToken(t){tokenRows.forEach(function(r){r.classList.toggle("active",r.dataset.token===t);});donutSegments.forEach(function(s){s.classList.toggle("active",s.dataset.token===t);});}
       tokenRows.forEach(function(r){r.addEventListener("mouseenter",function(){setActiveToken(r.dataset.token);});r.addEventListener("click",function(){setActiveToken(r.dataset.token);});});
       donutSegments.forEach(function(s){s.addEventListener("mouseenter",function(){setActiveToken(s.dataset.token);});s.addEventListener("click",function(){setActiveToken(s.dataset.token);});});
       setActiveToken("liquidity");
 
-      /* ROADMAP */
       var roadmapData={phase1:{label:"Phase 1",title:"Foundation",items:["Website launch","X / Telegram setup","Brand identity","Initial community build"]},phase2:{label:"Phase 2",title:"Pre-Sale",items:["Pre-sale launch","Early supporter rewards","Community growth","Marketing push"]},phase3:{label:"Phase 3",title:"Launch",items:["Launch $CAPI","Major CEX listings","Marketing & ADs for $CAPI","Community governance launch"]},phase4:{label:"Phase 4",title:"Expansion",items:["NFT collection",{text:"Merchandise",type:"merch"},"Features for holders including free rewards","Ecosystem development & long-term expansion"]}};
       var roadmapPins=document.querySelectorAll(".roadmap-pin"),roadmapCard=document.getElementById("roadmap-phase-card"),roadmapClose=document.getElementById("roadmap-close"),roadmapPhaseLabel=document.getElementById("roadmap-phase-label"),roadmapPhaseTitle=document.getElementById("roadmap-phase-title"),roadmapPhaseList=document.getElementById("roadmap-phase-list"),merchPreview=document.getElementById("merch-preview"),merchPreviewClose=document.getElementById("merch-preview-close");
       function openMerchPreview(){merchPreview.classList.add("show");merchPreview.setAttribute("aria-hidden","false");}
@@ -299,7 +276,6 @@
       roadmapPins.forEach(function(pin){pin.addEventListener("click",function(){openRoadmapPhase(pin.dataset.phase);});});
       roadmapClose.addEventListener("click",closeRoadmapPhase);
 
-      /* CLAIM */
       (function(){
         var s=document.createElement('script');
         s.src='https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js';
@@ -309,32 +285,22 @@
       })();
 
       function initClaim(){
+        var Buf=solanaWeb3.Buffer;
         var PROGRAM_ID='FyfMZ7iQT8wF5AD5oTZ8k7R2HZpjUFZSgN2m5LiYBEYq';
         var MINT_STR='VFEAugy5TqFDeGUcRQ1KA7jqNoG1sjF8LaZApVBaXbg';
         var RPC='https://api.mainnet-beta.solana.com';
         var TOKEN_PROGRAM=new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
         var ASSOC_TOKEN=new solanaWeb3.PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJe1bLT');
-        var merkleTree=null, walletPubkey=null, walletAdapter=null;
+        var merkleTree=null,walletPubkey=null,walletAdapter=null;
 
-        /* KLICOVA OPRAVA: spravny fetch s .then() chainem */
         fetch('https://raw.githubusercontent.com/edgeoddsbots-cell/capionsol/main/merkle-tree.json')
           .then(function(r){return r.json();})
-          .then(function(d){merkleTree=d;console.log('Merkle tree loaded, claims:',Object.keys(d.claims).length);})
+          .then(function(d){merkleTree=d;console.log('Merkle tree loaded:',Object.keys(d.claims).length,'claims');})
           .catch(function(e){console.error('Failed to load merkle tree:',e);});
 
         function $(id){return document.getElementById(id);}
-
-        function showSection(s){
-          $('claim-connect').style.display='none';
-          $('claim-eligible').style.display='none';
-          $('claim-not-eligible').style.display='none';
-          if(s==='connect') $('claim-connect').style.display='block';
-          if(s==='eligible') $('claim-eligible').style.display='block';
-          if(s==='not-eligible') $('claim-not-eligible').style.display='block';
-        }
-
+        function showSection(s){$('claim-connect').style.display='none';$('claim-eligible').style.display='none';$('claim-not-eligible').style.display='none';if(s==='connect')$('claim-connect').style.display='block';if(s==='eligible')$('claim-eligible').style.display='block';if(s==='not-eligible')$('claim-not-eligible').style.display='block';}
         function formatAmount(raw){return (Number(BigInt(raw))/1e9).toLocaleString('en-US',{maximumFractionDigits:0});}
-
         function getATA(owner,mint){return solanaWeb3.PublicKey.findProgramAddressSync([owner.toBytes(),TOKEN_PROGRAM.toBytes(),mint.toBytes()],ASSOC_TOKEN)[0];}
 
         function checkClaimed(addr){
@@ -344,8 +310,8 @@
               var pid=new solanaWeb3.PublicKey(PROGRAM_ID);
               var mint=new solanaWeb3.PublicKey(MINT_STR);
               var w=new solanaWeb3.PublicKey(addr);
-              var dist=solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('distributor'),mint.toBytes()],pid)[0];
-              var rec=solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('claim'),dist.toBytes(),w.toBytes()],pid)[0];
+              var dist=solanaWeb3.PublicKey.findProgramAddressSync([Buf.from('distributor'),mint.toBytes()],pid)[0];
+              var rec=solanaWeb3.PublicKey.findProgramAddressSync([Buf.from('claim'),dist.toBytes(),w.toBytes()],pid)[0];
               conn.getAccountInfo(rec).then(function(info){resolve(!!info);}).catch(function(){resolve(false);});
             }catch(e){resolve(false);}
           });
@@ -353,17 +319,13 @@
 
         function connectWallet(){
           var btn=$('claim-connect-btn');
-          btn.textContent='Connecting...';
-          btn.style.opacity='0.6';
+          btn.textContent='Connecting...';btn.style.opacity='0.6';
           var phantom=window.solana||(window.phantom&&window.phantom.solana);
           if(!phantom||!phantom.isPhantom){alert('Please install Phantom wallet from phantom.app');btn.textContent='Connect Wallet';btn.style.opacity='1';return;}
           phantom.connect().then(function(resp){
             walletPubkey=resp.publicKey.toString();
             walletAdapter=phantom;
-            console.log('Connected wallet:',walletPubkey);
-            console.log('Merkle tree ready:',!!merkleTree);
             var allocation=merkleTree&&merkleTree.claims&&merkleTree.claims[walletPubkey];
-            console.log('Allocation found:',!!allocation);
             $('claim-wallet-addr').textContent=walletPubkey.slice(0,8)+'...'+walletPubkey.slice(-8);
             $('claim-wallet-addr-2').textContent=walletPubkey.slice(0,8)+'...'+walletPubkey.slice(-8);
             if(allocation){
@@ -386,21 +348,21 @@
           var mint=new solanaWeb3.PublicKey(MINT_STR);
           var wallet=new solanaWeb3.PublicKey(walletPubkey);
           var allocation=merkleTree.claims[walletPubkey];
-          var dist=solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('distributor'),mint.toBytes()],pid)[0];
-          var rec=solanaWeb3.PublicKey.findProgramAddressSync([Buffer.from('claim'),dist.toBytes(),wallet.toBytes()],pid)[0];
+          var dist=solanaWeb3.PublicKey.findProgramAddressSync([Buf.from('distributor'),mint.toBytes()],pid)[0];
+          var rec=solanaWeb3.PublicKey.findProgramAddressSync([Buf.from('claim'),dist.toBytes(),wallet.toBytes()],pid)[0];
           var vault=getATA(dist,mint);
           var claimantAta=getATA(wallet,mint);
           conn.getLatestBlockhash().then(function(bh){
             var tx=new solanaWeb3.Transaction();
             tx.recentBlockhash=bh.blockhash;tx.feePayer=wallet;
             return conn.getAccountInfo(claimantAta).then(function(ataInfo){
-              if(!ataInfo){tx.add(new solanaWeb3.TransactionInstruction({keys:[{pubkey:wallet,isSigner:true,isWritable:true},{pubkey:claimantAta,isSigner:false,isWritable:true},{pubkey:wallet,isSigner:false,isWritable:false},{pubkey:mint,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},{pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false}],programId:ASSOC_TOKEN,data:Buffer.alloc(0)}));}
+              if(!ataInfo){tx.add(new solanaWeb3.TransactionInstruction({keys:[{pubkey:wallet,isSigner:true,isWritable:true},{pubkey:claimantAta,isSigner:false,isWritable:true},{pubkey:wallet,isSigner:false,isWritable:false},{pubkey:mint,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},{pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false}],programId:ASSOC_TOKEN,data:Buf.alloc(0)}));}
               var amount=BigInt(allocation.amount);
-              var proof=allocation.proof.map(function(p){return Buffer.from(p,'hex');});
-              var discriminator=Buffer.from([62,198,214,193,213,159,108,210]);
-              var amountBuf=Buffer.alloc(8);amountBuf.writeBigUInt64LE(amount);
-              var proofLenBuf=Buffer.alloc(4);proofLenBuf.writeUInt32LE(proof.length);
-              var data=Buffer.concat([discriminator,amountBuf,proofLenBuf].concat(proof));
+              var proof=allocation.proof.map(function(p){return Buf.from(p,'hex');});
+              var discriminator=Buf.from([62,198,214,193,213,159,108,210]);
+              var amountBuf=Buf.alloc(8);amountBuf.writeBigUInt64LE(amount);
+              var proofLenBuf=Buf.alloc(4);proofLenBuf.writeUInt32LE(proof.length);
+              var data=Buf.concat([discriminator,amountBuf,proofLenBuf].concat(proof));
               tx.add(new solanaWeb3.TransactionInstruction({keys:[{pubkey:dist,isSigner:false,isWritable:true},{pubkey:rec,isSigner:false,isWritable:true},{pubkey:vault,isSigner:false,isWritable:true},{pubkey:claimantAta,isSigner:false,isWritable:true},{pubkey:wallet,isSigner:true,isWritable:true},{pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SYSVAR_RENT_PUBKEY,isSigner:false,isWritable:false}],programId:pid,data:data}));
               return walletAdapter.signTransaction(tx);
             }).then(function(signed){return conn.sendRawTransaction(signed.serialize(),{skipPreflight:true});})
