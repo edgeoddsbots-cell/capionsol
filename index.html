@@ -285,10 +285,10 @@
       })();
 
       function initClaim(){
-        var Buf=window.Buffer||{from:function(a,enc){if(typeof a==='string'){var e=enc||'utf8';if(e==='hex'){var r=[];for(var i=0;i<a.length;i+=2)r.push(parseInt(a.substr(i,2),16));return new Uint8Array(r);}var te=new TextEncoder();return te.encode(a);}return new Uint8Array(a);},alloc:function(n){return new Uint8Array(n);},concat:function(list){var len=list.reduce(function(s,a){return s+a.length;},0);var r=new Uint8Array(len);var o=0;list.forEach(function(a){r.set(a,o);o+=a.length;});return r;}};
-var _origAlloc=Buf.alloc;Buf.alloc=function(n){var a=new Uint8Array(n);a.writeBigUInt64LE=function(val){var v=BigInt(val);for(var i=0;i<8;i++){a[i]=Number(v&BigInt(0xff));v>>=BigInt(8);}return a;};a.writeUInt32LE=function(val){a[0]=val&0xff;a[1]=(val>>8)&0xff;a[2]=(val>>16)&0xff;a[3]=(val>>24)&0xff;return a;};return a;};
+        var Buf=solanaWeb3.Buffer;
         var PROGRAM_ID='FyfMZ7iQT8wF5AD5oTZ8k7R2HZpjUFZSgN2m5LiYBEYq';
         var MINT_STR='VFEAugy5TqFDeGUcRQ1KA7jqNoG1sjF8LaZApVBaXbg';
+        var VAULT='b5E3BHWvchdgdSgeRroUjyBKyseS53mLm4UUk6mE9oQ';
         var RPC='https://mainnet.helius-rpc.com/?api-key=0eff0099-cd9d-44c5-8730-f7356e611662';
         var TOKEN_PROGRAM=new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
         var ASSOC_TOKEN=new solanaWeb3.PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJe1bLT');
@@ -351,23 +351,60 @@ var _origAlloc=Buf.alloc;Buf.alloc=function(n){var a=new Uint8Array(n);a.writeBi
           var allocation=merkleTree.claims[walletPubkey];
           var dist=solanaWeb3.PublicKey.findProgramAddressSync([Buf.from('distributor'),mint.toBytes()],pid)[0];
           var rec=solanaWeb3.PublicKey.findProgramAddressSync([Buf.from('claim'),dist.toBytes(),wallet.toBytes()],pid)[0];
-          var vault=new solanaWeb3.PublicKey('b5E3BHWvchdgdSgeRroUjyBKyseS53mLm4UUk6mE9oQ');
+          var vault=new solanaWeb3.PublicKey(VAULT);
           var claimantAta=getATA(wallet,mint);
+
           conn.getLatestBlockhash().then(function(bh){
             var tx=new solanaWeb3.Transaction();
             tx.recentBlockhash=bh.blockhash;tx.feePayer=wallet;
+
             return conn.getAccountInfo(claimantAta).then(function(ataInfo){
-              if(!ataInfo){tx.add(new solanaWeb3.TransactionInstruction({keys:[{pubkey:wallet,isSigner:true,isWritable:true},{pubkey:claimantAta,isSigner:false,isWritable:true},{pubkey:wallet,isSigner:false,isWritable:false},{pubkey:mint,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},{pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false}],programId:ASSOC_TOKEN,data:Buf.alloc(0)}));}
+              if(!ataInfo){
+                /* Create ATA instruction */
+                tx.add(new solanaWeb3.TransactionInstruction({
+                  keys:[
+                    {pubkey:wallet,isSigner:true,isWritable:true},
+                    {pubkey:claimantAta,isSigner:false,isWritable:true},
+                    {pubkey:wallet,isSigner:false,isWritable:false},
+                    {pubkey:mint,isSigner:false,isWritable:false},
+                    {pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},
+                    {pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false},
+                    {pubkey:solanaWeb3.SYSVAR_RENT_PUBKEY,isSigner:false,isWritable:false}
+                  ],
+                  programId:ASSOC_TOKEN,
+                  data:Buf.alloc(0)
+                }));
+              }
+
               var amount=BigInt(allocation.amount);
               var proof=allocation.proof.map(function(p){return Buf.from(p,'hex');});
               var discriminator=Buf.from([62,198,214,193,213,159,108,210]);
               var amountBuf=Buf.alloc(8);amountBuf.writeBigUInt64LE(amount);
               var proofLenBuf=Buf.alloc(4);proofLenBuf.writeUInt32LE(proof.length);
               var data=Buf.concat([discriminator,amountBuf,proofLenBuf].concat(proof));
-              tx.add(new solanaWeb3.TransactionInstruction({keys:[{pubkey:dist,isSigner:false,isWritable:true},{pubkey:rec,isSigner:false,isWritable:true},{pubkey:vault,isSigner:false,isWritable:true},{pubkey:claimantAta,isSigner:false,isWritable:true},{pubkey:wallet,isSigner:true,isWritable:true},{pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},{pubkey:solanaWeb3.SYSVAR_RENT_PUBKEY,isSigner:false,isWritable:false}],programId:pid,data:data}));
+
+              /* Claim instruction */
+              tx.add(new solanaWeb3.TransactionInstruction({
+                keys:[
+                  {pubkey:dist,isSigner:false,isWritable:true},
+                  {pubkey:rec,isSigner:false,isWritable:true},
+                  {pubkey:vault,isSigner:false,isWritable:true},
+                  {pubkey:claimantAta,isSigner:false,isWritable:true},
+                  {pubkey:wallet,isSigner:true,isWritable:true},
+                  {pubkey:TOKEN_PROGRAM,isSigner:false,isWritable:false},
+                  {pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},
+                  {pubkey:solanaWeb3.SYSVAR_RENT_PUBKEY,isSigner:false,isWritable:false}
+                ],
+                programId:pid,
+                data:data
+              }));
+
               return walletAdapter.signTransaction(tx);
-            }).then(function(signed){return conn.sendRawTransaction(signed.serialize(),{skipPreflight:true});})
-            .then(function(sig){return conn.confirmTransaction({signature:sig,blockhash:bh.blockhash,lastValidBlockHeight:bh.lastValidBlockHeight},'confirmed').then(function(){return sig;});});
+            }).then(function(signed){
+              return conn.sendRawTransaction(signed.serialize(),{skipPreflight:false});
+            }).then(function(sig){
+              return conn.confirmTransaction({signature:sig,blockhash:bh.blockhash,lastValidBlockHeight:bh.lastValidBlockHeight},'confirmed').then(function(){return sig;});
+            });
           }).then(function(sig){
             $('claim-tx-link').href='https://solscan.io/tx/'+sig;
             $('claim-tx').style.display='block';$('claim-btn').style.display='none';
