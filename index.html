@@ -289,7 +289,7 @@
 var _origAlloc=Buf.alloc;Buf.alloc=function(n){var a=new Uint8Array(n);a.writeBigUInt64LE=function(val){var v=BigInt(val);for(var i=0;i<8;i++){a[i]=Number(v&BigInt(0xff));v>>=BigInt(8);}return a;};a.writeUInt32LE=function(val){a[0]=val&0xff;a[1]=(val>>8)&0xff;a[2]=(val>>16)&0xff;a[3]=(val>>24)&0xff;return a;};return a;};
         var PROGRAM_ID='FyfMZ7iQT8wF5AD5oTZ8k7R2HZpjUFZSgN2m5LiYBEYq';
         var MINT_STR='VFEAugy5TqFDeGUcRQ1KA7jqNoG1sjF8LaZApVBaXbg';
-        var RPC='https://api.mainnet-beta.solana.com';
+        var RPC='https://mainnet.helius-rpc.com/?api-key=0eff0099-cd9d-44c5-8730-f7356e611662';
         var TOKEN_PROGRAM=new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
         var ASSOC_TOKEN=new solanaWeb3.PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJe1bLT');
         var merkleTree=null,walletPubkey=null,walletAdapter=null;
